@@ -14,7 +14,7 @@ public class Sistema_Control{
         return "Problema solcionado";
     }
 
-    public String interpretar(String mensaje){
-        return this.modulo.interpretar_mensaje(mensaje);
+    public void interpretar(String mensaje){
+        this.modulo.interpretar_mensaje(mensaje);
     }
 }

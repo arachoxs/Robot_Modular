@@ -5,11 +5,11 @@ public class Sistema_Comunicacion {
         this.modulo = modulo;
     }
 
-    public String recibir_mensaje(String mensaje){ //recibe un mensaje de otro modulo
-        return this.modulo.getSistemaControl().interpretar(mensaje);
+    public void recibir_mensaje(String mensaje){ //recibe un mensaje de otro modulo
+        this.modulo.getSistemaControl().interpretar(mensaje);
     }
 
-    public String enviar_mensaje(Modulo receptor , String mensaje){ //envia un mensaje a otro modulo
-        return receptor.getSistemaComunicacion().recibir_mensaje(mensaje);
+    public void enviar_mensaje(Modulo receptor , String mensaje){ //envia un mensaje a otro modulo
+        receptor.getSistemaComunicacion().recibir_mensaje(mensaje);
     }
 }
