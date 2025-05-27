@@ -19,8 +19,8 @@ public abstract class Modulo {
         this.ancho = ancho;
         this.profundidad = profundidad;
         this.encendido = encendido;
-        this.sistemaControl = new Sistema_Control();
-        this.sistemaComunicacion = new Sistema_Comunicacion();
+        this.sistemaControl = new Sistema_Control(this);
+        this.sistemaComunicacion = new Sistema_Comunicacion(this);
     }
 
     //Getters
@@ -63,5 +63,7 @@ public abstract class Modulo {
     public void apagar(){
         this.encendido=false;
     }
+
+    public abstract String interpretar_mensaje(String mensaje); //interpreta lo que el sistema de comunicacion recibe
 
 }

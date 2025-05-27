@@ -1,6 +1,10 @@
 import javax.swing.*;
 
 public class Sistema_Control{
+    Modulo modulo;
+    public Sistema_Control(Modulo modulo){
+        this.modulo = modulo;
+    }
 
     public boolean enviar_respuesta_accion(){
         return true;
@@ -10,7 +14,7 @@ public class Sistema_Control{
         return "Problema solcionado";
     }
 
-    public void interpretar_mensaje(String mensaje){
-        System.out.println(mensaje);
+    public String interpretar(String mensaje){
+        return this.modulo.interpretar_mensaje(mensaje);
     }
 }
