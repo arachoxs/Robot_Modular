@@ -10,7 +10,7 @@ public class SistemaComunicacion {
     public void set_modulo_propietario(Modulo modulo_propietario) { this.modulo_propietario = modulo_propietario; }
 
     public void recibir_mensaje(String mensaje){ //recibe un mensaje de otro modulo
-        System.out.println("Mensaje recibido en módulo " + modulo_propietario.get_id() + ": " + mensaje);
+        System.out.println("Mensaje recibido en módulo " + modulo_propietario.get_referencia() + ": " + mensaje);
         //this.modulo_propietario.get_sistema_control().interpretar(mensaje);
     }
 

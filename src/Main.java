@@ -5,34 +5,25 @@ public class Main {
         Usuario usuario = new Usuario(1,"beta","Estandar");
         Robot robot = new Robot ("123","ro","Robotcini banini");
 
-        //modulos dinamicos
-        Extension modulo_extencion = new Extension(1,"ext","Extension",10,10,10,false,1);
-        Rotacion modulo_rotacion = new Rotacion(2,"rot","Rotacion",10,10,10,false,1);
-        Helicoidal modulo_helicoidal = new Helicoidal(3,"heli","Helicoidal",10,10,10,false,1);
+        robot.agregar_extension(1, "ext", "Extension", 10, 10, 10, false, 1);
+        robot.agregar_rotacion(2, "rot", "Rotacion", 10, 10, 10, false, 1);
+        robot.agregar_helicoidal(3, "heli", "Helicoidal", 10, 10, 10, false, 1);
 
-        //agregacion modulos
-        robot.agregar_modulo(modulo_extencion);
-        robot.agregar_modulo(modulo_rotacion);
-        robot.agregar_modulo(modulo_helicoidal);
+        robot.agregar_camara(4, "cam", "Camara", 10, 10, 10, false, 1);
+        robot.agregar_sensor_proximidad(5, "prox", "Proximidad", 10, 10, 10, false, 1);
+        robot.agregar_altavoz(6, "alt", "Altavoz", 10, 10, 10, false, 1);
 
-        //modulos estaticos
-        Camara modulo_camara = new Camara(4,"cam","Camara",10,10,10,false,0);
-        Sensor sensor_camara = new Sensor(5,"visual","Sensor que reconoce objetos");
-        modulo_camara.agregar_sensor(sensor_camara);
 
-        SensorProximidad modulo_proximidad = new SensorProximidad(6,"prox","Proximidad",10,10,10, false, 0);
-        Sensor sensor_proximidad = new Sensor(7,"proximidad","Sensor que detecta objetos");
-        modulo_proximidad.agregar_sensor(sensor_proximidad);
+        robot.get_modulo_Id(5).get_sistema_comunicacion().enviar_mensaje(robot.get_modulo_Id(4), "Objeto detectado");
 
-        Altavoz modulo_altavoz = new Altavoz(8,"alt","Altavoz",10,10,10,false,0);
-        Actuador actuador_altavoz = new Actuador(9,"sonido","Emite alerta");
-        modulo_altavoz.agregar_actuador(actuador_altavoz);
+        //usuario y modulo_dinamico
+        //modulo dinamico y Sensor_proximidad
+        //Sensor_proximidad y camara
+        //si es aire-> camara y modulo dinamico
+        //si es mascota -> camara y altavoz
+        //si es obstaculo -> camara y rotacion
+        //si ya movio el mascota -> altavoz y modulo dinamico
 
-        robot.agregar_modulo(modulo_camara);
-        robot.agregar_modulo(modulo_proximidad);
-        robot.agregar_modulo(modulo_altavoz);
-
-        modulo_proximidad.get_sistema_comunicacion().enviar_mensaje(modulo_camara, "Objeto detectado");
 
 
 }
