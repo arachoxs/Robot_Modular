@@ -1,8 +1,8 @@
-public class Sistema_Comunicacion {
-    Modulo modulo;
+public class SistemaComunicacion {
+    private Modulo modulo_propietario;
 
-    public Sistema_Comunicacion(Modulo modulo){
-        this.modulo = modulo;
+    public SistemaComunicacion(Modulo modulo){
+        this.modulo_propietario = modulo;
     }
 
     public void recibir_mensaje(String mensaje){ //recibe un mensaje de otro modulo

@@ -6,9 +6,6 @@ public abstract class Percepcion extends Modulo_Estatico{
         this.N_Sensores = N_Sensores;
     }
 
-    public abstract int procesar_datos(int[] mapa);
-
-    public int captar_informacion(){ // Aquí se devuelve el objeto percibido. Es la funcion que verifica si es aire bloque o animal
-        return 0;
-    }
+    public abstract int procesar_datos(Object datos);
+    public abstract Object captar_informacion();
 }

@@ -1,4 +1,6 @@
-public class Helicoidal extends Modulo_Dinamico{
+import java.util.List;
+
+public class Helicoidal extends ModuloDinamico {
 
     //Constructor
     public Helicoidal(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int N_Motores) {
@@ -7,8 +9,24 @@ public class Helicoidal extends Modulo_Dinamico{
 
     //Methods
     @Override
-    public boolean moverse(int n_pasos, int direccion) {
-
+    public boolean moverse(int n_pasos, int[] direccion) {
+        // Lógica específica para movimiento helicoidal (gira y se traslada)
+        System.out.println("Movimiento helicoidal: " + n_pasos + " unidades");
         return true;
+    }
+
+    @Override
+    public void encender() {
+        System.out.println("Módulo Helicoidal encendido");
+    }
+
+    @Override
+    public void apagar() {
+        System.out.println("Módulo Helicoidal apagado");
+    }
+
+    @Override
+    public void interpretar_mensaje(String mensaje) {
+
     }
 }

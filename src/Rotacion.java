@@ -1,4 +1,4 @@
-public class Rotacion extends Modulo_Dinamico {
+public class Rotacion extends ModuloDinamico {
 
     //Consrtuctor
     public Rotacion(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int N_Motores) {
@@ -7,12 +7,13 @@ public class Rotacion extends Modulo_Dinamico {
 
     //Methods
     @Override
-    public boolean moverse(int n_pasos, int direccion) {
+    public boolean moverse(int n_pasos, int[] direccion) {
+        // Lógica específica para movimiento de rotación (giros)
+        System.out.println("Rotando: " + n_pasos + " grados");
         return true;
     }
 
     @Override
-    public String interpretar_mensaje(String mensaje) {
-        return mensaje;
+    public void interpretar_mensaje(String mensaje) {
     }
 }
