@@ -10,4 +10,9 @@ public class Rotacion extends Modulo_Dinamico {
     public boolean moverse(int n_pasos, int direccion) {
         return true;
     }
+
+    @Override
+    public String interpretar_mensaje(String mensaje) {
+        return mensaje;
+    }
 }

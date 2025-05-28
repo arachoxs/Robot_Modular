@@ -8,7 +8,7 @@ public abstract class Percepcion extends Modulo_Estatico{
 
     public abstract int procesar_datos(int[] mapa);
 
-    public int captar_informacion(){
-        return 0;// Aquí se devuelve el objeto percibido.
+    public int captar_informacion(){ // Aquí se devuelve el objeto percibido. Es la funcion que verifica si es aire bloque o animal
+        return 0;
     }
 }
