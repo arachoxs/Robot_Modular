@@ -21,26 +21,26 @@ public abstract class Modulo {
         this.sistema_comunicacion = new SistemaComunicacion(this);
     }
 
-    //Getters
-    public int getId(){
+    //Getters y Setters
+    public int get_id(){
         return this.id;
     }
-    public String getReferencia(){
+    public String get_referencia(){
         return this.referencia;
     }
-    public String getDescripcion(){
+    public String get_descripcion(){
         return this.descripcion;
     }
-    public int getLargo(){
+    public int get_largo(){
         return this.largo;
     }
-    public int getAncho(){
+    public int get_ancho(){
         return this.ancho;
     }
-    public int getProfundidad(){
+    public int get_profundidad(){
         return this.profundidad;
     }
-    public boolean getEncendido(){
+    public boolean get_encendido(){
         return this.encendido;
     }
     public SistemaComunicacion get_sistema_comunicacion(){
@@ -66,6 +66,14 @@ public abstract class Modulo {
     public void recibir_info_accion(String info) {
         // Lógica para recibir información de acción
         System.out.println("Módulo " + id + " recibió info de acción: " + info);
+    }
+
+    public boolean enviar_respuesta_accion() {
+        return sistema_control.enviar_respuesta_accion();
+    }
+
+    public String gestionar_solucion() {
+        return sistema_control.gestionar_solucion();
     }
 
     public abstract void interpretar_mensaje(String mensaje); //interpreta lo que el sistema de comunicacion recibe

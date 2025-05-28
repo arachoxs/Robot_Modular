@@ -5,16 +5,15 @@ public class Robot {
     private String serie;
     private String alias;
     private String descripcion;
-    private int[] pos;
-    private char direccion;
-    private List<Modulo> modulos = new ArrayList<>();
+    private List<Modulo> modulos;
+    private boolean encendido;
 
-    public Robot(String Serie, String Alias, String Descripcion, int[] Pos, char direccion) {
+    public Robot(String Serie, String Alias, String Descripcion) {
         this.serie = Serie;
         this.alias = Alias;
         this.descripcion = Descripcion;
-        this.pos = Pos;
-        this.direccion = direccion;
+        this.modulos = new java.util.ArrayList<>();
+        this.encendido = false;
 
         //no se agregan modulos por defecto - todos se agregaran desde agregarModulo
     }

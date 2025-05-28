@@ -32,12 +32,20 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public String enviar_mensaje() {
-        return null;
+    public void enviarMensaje(String mensaje) {
+        // Implementación para enviar mensaje
     }
 
-    public void recibir_mensaje(String mensaje) {
+    public void recibirMensaje(String mensaje) {
+        // Implementación para recibir mensaje
+    }
 
+    public void encenderRobot(Robot robot) {
+        robot.encender();
+    }
+
+    public void apagarRobot(Robot robot) {
+        robot.apagar();
     }
 
     @Override

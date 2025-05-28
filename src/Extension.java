@@ -7,7 +7,9 @@ public class Extension extends ModuloDinamico {
 
     //Methods
     @Override
-    public boolean moverse(int n_pasos, int direccion) {
+    public boolean moverse(int n_pasos, int[] direccion) {
+        // Lógica específica para movimiento de extensión (línea recta)
+        System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
         return true;
     }
 

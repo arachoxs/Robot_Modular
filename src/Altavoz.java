@@ -9,6 +9,14 @@ public class Altavoz extends Actuacion {
         this.actuadores = new ArrayList<>();
     }
 
+    public void agregar_actuador(Actuador actuador){
+        this.actuadores.add(actuador);
+        //aumentar numero actuadores
+    }
+
+    //getters
+    public List<Actuador> getActuadores() { return actuadores; }
+
     @Override
     public int realizar_accion() {
         int retorno;
@@ -18,5 +26,19 @@ public class Altavoz extends Actuacion {
         }
 
         return 1;
+    }
+
+    @Override
+    public void encender() {
+        System.out.println("Altavoz encendido");
+    }
+
+    @Override
+    public void apagar() {
+        System.out.println("Altavoz apagado");
+    }
+
+    @Override
+    public void interpretar_mensaje(String mensaje) {
     }
 }

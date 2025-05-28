@@ -1,8 +1,8 @@
 public class Rotacion extends ModuloDinamico {
 
-    //Consrtuctor
-    public Rotacion(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int N_Motores) {
-        super(id, referencia, descripcion, largo, ancho, profundidad, encendido, N_Motores);
+    //Constructor
+    public Rotacion(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_motores) {
+        super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_motores);
     }
 
     //Methods
@@ -15,5 +15,15 @@ public class Rotacion extends ModuloDinamico {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
+    }
+
+    @Override
+    public void encender() {
+        System.out.println("Módulo de Rotación encendido");
+    }
+
+    @Override
+    public void apagar() {
+        System.out.println("Módulo de Rotación apagado");
     }
 }

@@ -1,5 +1,7 @@
-public abstract class Modulo_Dinamico extends Modulo{
-    private int N_Motores;
+import java.util.List;
+
+public abstract class ModuloDinamico extends Modulo{
+    private int n_motores;
 
     //Constructor
     public ModuloDinamico(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_motores) {

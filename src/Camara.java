@@ -2,10 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Camara extends Percepcion{
-    private List<Sensor> sensores = new ArrayList<>();
+    private List<Sensor> sensores;
 
-    public Camara(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int N_Sensores){
-        super(id, referencia, descripcion, largo, ancho, profundidad, encendido, N_Sensores);
+    public Camara(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores){
+        super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
+        this.sensores = new ArrayList<>();
     }
 
     public void agregar_sensor(Sensor sensor){

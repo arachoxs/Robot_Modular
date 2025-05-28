@@ -3,8 +3,8 @@ import java.util.List;
 public class Helicoidal extends ModuloDinamico {
 
     //Constructor
-    public Helicoidal(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int N_Motores) {
-        super(id, referencia, descripcion, largo, ancho, profundidad, encendido, N_Motores);
+    public Helicoidal(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_motores) {
+        super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_motores);
     }
 
     //Methods
