@@ -1,5 +1,3 @@
-import java.util.List;
-
 public abstract class Modulo {
     private int id;
     private String referencia;
@@ -8,8 +6,8 @@ public abstract class Modulo {
     private int ancho;
     private int profundidad;
     private boolean encendido;
-    private Sistema_Control sistemaControl;
-    private Sistema_Comunicacion sistemaComunicacion;
+    private SistemaControl sistema_control;
+    private SistemaComunicacion sistema_comunicacion;
 
     public Modulo(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido) {
         this.id = id;
@@ -19,49 +17,65 @@ public abstract class Modulo {
         this.ancho = ancho;
         this.profundidad = profundidad;
         this.encendido = encendido;
-        this.sistemaControl = new Sistema_Control();
-        this.sistemaComunicacion = new Sistema_Comunicacion();
+        this.sistema_control = new SistemaControl(this);
+        this.sistema_comunicacion = new SistemaComunicacion(this);
     }
 
-    //Getters
-    public int getId(){
+    //Getters y Setters
+    public int get_id(){
         return this.id;
     }
-    public String getReferencia(){
+    public String get_referencia(){
         return this.referencia;
     }
-    public String getDescripcion(){
+    public String get_descripcion(){
         return this.descripcion;
     }
-    public int getLargo(){
+    public int get_largo(){
         return this.largo;
     }
-    public int getAncho(){
+    public int get_ancho(){
         return this.ancho;
     }
-    public int getProfundidad(){
+    public int get_profundidad(){
         return this.profundidad;
     }
-    public boolean getEncendido(){
+    public boolean get_encendido(){
         return this.encendido;
     }
-    public Sistema_Comunicacion getSistemaComunicacion(){
-        return this.sistemaComunicacion;
+    public SistemaComunicacion get_sistema_comunicacion(){
+        return this.sistema_comunicacion;
     }
-    public Sistema_Control getSistemaControl(){
-        return this.sistemaControl;
+    public SistemaControl get_sistema_control(){ return this.sistema_control; }
+
+    public void set_id(int id){ this.id=id;}
+    public void set_referencia(String referencia){ this.referencia = referencia;}
+    public void set_descripcion(String descripcion){ this.descripcion = descripcion;}
+    public void set_largo(int largo){ this.largo = largo;}
+    public void set_ancho(int ancho){ this.ancho = ancho;}
+    public void set_profundidad(int profundidad){ this.profundidad = profundidad;}
+    public void set_encendido(boolean encendido){ this.encendido = encendido;}
+    public void set_sistema_comunicacion(SistemaComunicacion sistema_comunicacion){ this.sistema_comunicacion = sistema_comunicacion;}
+    public void set_sistema_control(SistemaControl sistema_control){ this.sistema_control = sistema_control;}
+
+    //métodos
+    public abstract void encender();
+    public abstract void apagar();
+
+
+    public void recibir_info_accion(String info) {
+        // Lógica para recibir información de acción
+        System.out.println("Módulo " + id + " recibió info de acción: " + info);
     }
 
-    //Setters
-
-
-    //metodos
-    public void encender(){
-        this.encendido=true;
+    public boolean enviar_respuesta_accion() {
+        return sistema_control.enviar_respuesta_accion();
     }
 
-    public void apagar(){
-        this.encendido=false;
+    public String gestionar_solucion() {
+        return sistema_control.gestionar_solucion();
     }
+
+    public abstract void interpretar_mensaje(String mensaje); //interpreta lo que el sistema de comunicacion recibe
 
 }
