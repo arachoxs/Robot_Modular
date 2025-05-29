@@ -14,7 +14,7 @@ public class Main {
         robot.agregar_altavoz(6, "alt", "Altavoz", 10, 10, 10, false, 1);
 
 
-        robot.get_modulo_Id(5).get_sistema_comunicacion().enviar_mensaje(robot.get_modulo_Id(4), "Objeto detectado");
+        robot.get_modulo_id(5).get_sistema_comunicacion().enviar_mensaje(robot.get_modulo_id(4), "Objeto detectado");
 
         //usuario y modulo_dinamico
         //modulo dinamico y Sensor_proximidad

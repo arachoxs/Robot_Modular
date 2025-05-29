@@ -58,7 +58,7 @@ public class Robot {
         this.agregar_modulo(altavoz);
     }
 
-    public Modulo get_modulo_Id(int id) {
+    public Modulo get_modulo_id(int id) {
         for (Modulo modulo : modulos) {
             if (modulo.get_id() == id) {
                 return modulo;
