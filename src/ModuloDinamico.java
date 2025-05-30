@@ -13,6 +13,5 @@ public abstract class ModuloDinamico extends Modulo{
     public int get_n_motores() { return n_motores; }
     public void set_n_motores(int n_motores) { this.n_motores = n_motores; }
 
-    public abstract boolean moverse(int n_pasos, int[] direccion);
-
+    public abstract boolean moverse(int n_pasos, int grados, int pasos_giro);
     }

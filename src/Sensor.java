@@ -9,9 +9,15 @@ public class Sensor {
         this.descripcion = descripcion;
     }
 
-    public Object captar_informacion(){
+    public int captar_informacion(){
+        int[] direccionActual = Global.robot.getDireccion();
+        int[] posicionActuaal = Global.robot.getPos();
         // Lógica específica según el tipo de sensor
-        return new Object(); // Placeholder
+        if(direccionActual[0]==0){
+            return matriz[posicionActuaal[0]][posicionActuaal[1]+1];
+        }
+
+        return matriz[posicionActuaal[0]+1][posicionActuaal[1]];
     }
 
     // Getters y Setters

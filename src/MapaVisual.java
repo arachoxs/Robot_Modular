@@ -50,13 +50,24 @@ public class MapaVisual extends JPanel {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Mapa Interactivo");
-        MapaVisual mapa = new MapaVisual();
+        new Usuario(1, "beta", "Estandar");
+        Global.robot.agregar_extension(1, "ext", "Extension", 10, 10, 10, false, 1);
+        Global.robot.agregar_rotacion(2, "rot", "Rotacion", 10, 10, 10, false, 1);
+        Global.robot.agregar_helicoidal(3, "heli", "Helicoidal", 10, 10, 10, false, 1);
+        Global.robot.agregar_camara(4, "cam", "Camara", 10, 10, 10, false, 1);
+        Global.robot.agregar_sensor_proximidad(5, "prox", "Proximidad", 10, 10, 10, false, 1);
+        Global.robot.agregar_altavoz(6, "alt", "Altavoz", 10, 10, 10, false, 1);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(mapa);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        Global.robot.get_modulo_id(1).get_sistema_comunicacion().enviar_mensaje(5,"scan");
+
+
+        //JFrame frame = new JFrame("Mapa Interactivo");
+        //MapaVisual mapa = new MapaVisual();
+
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.add(mapa);
+        //frame.pack();
+        //frame.setLocationRelativeTo(null);
+        //frame.setVisible(true);
     }
 }

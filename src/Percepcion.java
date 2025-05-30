@@ -11,5 +11,5 @@ public abstract class Percepcion extends ModuloEstatico {
     public void set_n_sensores(int n_sensores) { this.n_sensores = n_sensores; }
 
     public abstract int procesar_datos(Object datos);
-    public abstract Object captar_informacion();
+    public abstract int captar_informacion();
 }

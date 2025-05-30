@@ -6,6 +6,8 @@ public class Robot {
     private String alias;
     private String descripcion;
     private List<Modulo> modulos;
+    public int[] pos;
+    public int[] direccion;
     private boolean encendido;
 
     public Robot(String Serie, String Alias, String Descripcion) {

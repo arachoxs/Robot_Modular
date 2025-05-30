@@ -29,9 +29,14 @@ public class Camara extends Percepcion{
     }
 
     @Override
-    public Object captar_informacion() {
+    public int captar_informacion() {
+        int cap=-1;
         for(Sensor sensor : sensores){
-            return sensor.captar_informacion();
+            cap = sensor.captar_informacion();
+        }
+
+        if(cap==-1){
+            return 0; //hay un error en la toma de la informacion
         }
 
         return 1;

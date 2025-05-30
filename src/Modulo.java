@@ -18,7 +18,7 @@ public abstract class Modulo {
         this.profundidad = profundidad;
         this.encendido = encendido;
         this.sistema_control = new SistemaControl(this);
-        this.sistema_comunicacion = new SistemaComunicacion(this);
+        this.sistema_comunicacion = new SistemaComunicacion(this, Global.red);
     }
 
     //Getters y Setters
@@ -43,6 +43,13 @@ public abstract class Modulo {
     public boolean get_encendido(){
         return this.encendido;
     }
+    public int[] get_pos_robot(){
+        return Global.robot.getPos();
+    }
+    public int[] get_direccion_robot(){
+        return Global.robot.getDireccion();
+    }
+
     public SistemaComunicacion get_sistema_comunicacion(){
         return this.sistema_comunicacion;
     }

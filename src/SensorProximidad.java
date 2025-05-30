@@ -21,12 +21,24 @@ public class SensorProximidad extends Percepcion{
     }
 
     @Override
-    public Object captar_informacion() {
+    public int captar_informacion() {
+        int scan=-1;
+
         for (Sensor sensor : sensores){
-            return sensor.captar_informacion();
+            scan = sensor.captar_informacion();
         }
 
-        return null;
+        if(scan==-1){
+            return 0; //hubo un error en la toma de datos
+        }
+        else if(scan==0){ //hay aire
+            this.get_sistema_comunicacion().enviar_mensaje(1,"mover fijo"); //envia mensaje a ext para que se mueva fijo 1.
+        }
+        else{ //existe algo diferente a aire se tiene que verificar que es
+            this.get_sistema_comunicacion().enviar_mensaje(4,"verificar objeto");
+        }
+
+        return 1;
     }
 
     @Override

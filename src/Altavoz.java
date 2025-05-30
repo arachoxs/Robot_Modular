@@ -14,6 +14,7 @@ public class Altavoz extends Actuacion {
         //aumentar numero actuadores
     }
 
+
     //getters
     public List<Actuador> getActuadores() { return actuadores; }
 

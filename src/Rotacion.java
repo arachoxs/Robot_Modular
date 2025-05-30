@@ -7,10 +7,46 @@ public class Rotacion extends ModuloDinamico {
 
     //Methods
     @Override
-    public boolean moverse(int n_pasos, int[] direccion) {
-        // Lógica específica para movimiento de rotación (giros)
-        System.out.println("Rotando: " + n_pasos + " grados");
+    public boolean moverse(int n_pasos, int grados , int pasos_giro) {
+        // Obtener la dirección actual del robot
+        int[] direccionActual = Global.robot.getDireccion();
+
+        // Definir las 4 direcciones posibles en orden horario
+        int[][] direcciones = {
+                {0, 1},   // Derecha
+                {1, 0},   // Abajo
+                {0, -1},  // Izquierda
+                {-1, 0}   // Arriba
+        };
+
+        // Encontrar el índice de la dirección actual
+        int indiceActual = 0;
+        for (int i = 0; i < 4; i++) {
+            if (direccionActual[0] == direcciones[i][0] && direccionActual[1] == direcciones[i][1]) {
+                indiceActual = i;
+                break;
+            }
+        }
+
+        // Calcular cuántos giros de 90° hay que hacer
+        int pasos = grados / 90;
+        // Ajustar para negativos y normalizar a 0-3
+        int nuevoIndice = (indiceActual + pasos) % 4;
+        if (nuevoIndice < 0) {
+            nuevoIndice += 4;
+        }
+
+        // Cambiar la dirección del robot
+        Global.robot.setDireccion(direcciones[nuevoIndice]);
+
+        System.out.println("Robot giró " + grados + " grados. Nueva dirección: [" +
+                direcciones[nuevoIndice][0] + "," + direcciones[nuevoIndice][1] + "]");
+
         return true;
+    }
+
+    public boolean moverse(int n_pasos, int grados){
+        return moverse(0, grados, 0);
     }
 
     @Override

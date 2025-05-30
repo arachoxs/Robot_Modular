@@ -9,7 +9,7 @@ public class Helicoidal extends ModuloDinamico {
 
     //Methods
     @Override
-    public boolean moverse(int n_pasos, int[] direccion) {
+    public boolean moverse(int n_pasos, int grados, int pasos_giro) {
         // Lógica específica para movimiento helicoidal (gira y se traslada)
         System.out.println("Movimiento helicoidal: " + n_pasos + " unidades");
         return true;
