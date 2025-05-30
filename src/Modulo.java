@@ -75,9 +75,7 @@ public abstract class Modulo {
         System.out.println("Módulo " + id + " recibió info de acción: " + info);
     }
 
-    public boolean enviar_respuesta_accion() {
-        return sistema_control.enviar_respuesta_accion();
-    }
+    public abstract void enviar_respuesta_accion(boolean respuesta);
 
     public String gestionar_solucion() {
         return sistema_control.gestionar_solucion();

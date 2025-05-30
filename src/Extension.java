@@ -44,29 +44,36 @@ public class Extension extends ModuloDinamico {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje.equals("MOVER FIJO")){
-            this.mueve_un_paso();
+        boolean resultadoAccion = false;
+
+        try {
+            mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
+
+            if (mensaje.equals("MOVER FIJO")) {
+                resultadoAccion = this.mueve_un_paso();
+
+            } else if (mensaje.startsWith("MOVER")) {
+                int pasos = extraerPasos(mensaje);
+                resultadoAccion = this.moverse(pasos);
+
+            } else {
+                System.out.println("Mensaje no reconocido: " + mensaje);
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Error: número de pasos inválido.");
+        } catch (Exception e) {
+            System.out.println("Error general al interpretar mensaje: " + e.getMessage());
         }
 
-        if (mensaje.startsWith("mover")) {
-            // Extraer lo que viene después del "+"
-
-            // Extraer lo que viene después de "mover"
-            String numeroStr = mensaje.substring("mover".length()).trim(); // Elimina espacios
-
-// Convertir a entero
-
-
-            // Convertir a entero
-            int pasos = Integer.parseInt(numeroStr);
-
-            this.moverse(pasos);
-
-        } else {
-            System.out.println("Mensaje no reconocido");
-        }
-        System.out.println("Movimiento");
+        this.enviar_respuesta_accion(resultadoAccion);
     }
+
+    private int extraerPasos(String mensaje) throws NumberFormatException {
+        String numeroStr = mensaje.substring("MOVER".length()).trim();
+        return Integer.parseInt(numeroStr);
+    }
+
 
     @Override
     public void encender() {
@@ -76,5 +83,16 @@ public class Extension extends ModuloDinamico {
     @Override
     public void apagar() {
         System.out.println("Módulo de Extensión apagado");
+    }
+
+    @Override
+    public void enviar_respuesta_accion(boolean respuesta) {
+        if(respuesta){
+            System.out.println("Movimiento del robot ejecutado sin problemas.");
+        }
+        else{
+            System.out.println("Error en movimiento detectado, ejecutando gestion de errores.");
+            this.gestionar_solucion();
+        }
     }
 }

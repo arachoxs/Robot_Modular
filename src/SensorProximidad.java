@@ -15,9 +15,23 @@ public class SensorProximidad extends Percepcion{
         this.sensores.add(sensor);
     }
 
-    @Override
-    public int procesar_datos(Object datos) {
-        return 0;
+    public int procesar_datos(int datos,String instruccion) {
+        if(datos==-1){
+            return 0;
+        }
+
+        if(datos==0){
+            this.get_sistema_comunicacion().enviar_mensaje(1,"MOVER FIJO");
+        }else{
+            if(instruccion.equals("VERIFICAR IZQUIERDA") && datos==1){
+                this.get_sistema_comunicacion().enviar_mensaje(2,"ROTAR 180");
+            }
+            else{
+                this.get_sistema_comunicacion().enviar_mensaje(4,"RECONOCER OBJETO");
+            }
+        }
+
+        return 1;
     }
 
     @Override
@@ -28,23 +42,15 @@ public class SensorProximidad extends Percepcion{
             scan = sensor.captar_informacion();
         }
 
-        if(scan==-1){
-            return 0; //hubo un error en la toma de datos
-        }
-        else if(scan==0){ //hay aire
-            this.get_sistema_comunicacion().enviar_mensaje(1,"MOVER FIJO"); //envia mensaje a ext para que se mueva fijo 1.
-        }
-        else{ //existe algo diferente a aire se tiene que verificar que es
-            this.get_sistema_comunicacion().enviar_mensaje(4,"verificar objeto");
-        }
-
-        return 1;
+        return scan;
     }
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje=="Verificar"){
-            this.captar_informacion();
+        if(mensaje.equals("VERIFICAR")){
+            this.procesar_datos(captar_informacion(),"");
+        }else if(mensaje.equals("VERIFICAR IZQUIERDA")){
+            this.procesar_datos(captar_informacion(),"VERIFICAR IZQUIERDA");
         }
     }
 
@@ -56,5 +62,10 @@ public class SensorProximidad extends Percepcion{
     @Override
     public void apagar() {
         System.out.println("Sensor de Proximidad apagado");
+    }
+
+    @Override
+    public void enviar_respuesta_accion(boolean respuesta) {
+
     }
 }

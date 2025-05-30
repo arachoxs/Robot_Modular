@@ -52,6 +52,10 @@ public class Rotacion extends ModuloDinamico {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
+        if(mensaje.equals("ROTAR IZQUIERDA")){
+            moverse(0, -90);
+            this.get_sistema_comunicacion().enviar_mensaje(5,"VERIFICAR IZQUIERDA");
+        }
     }
 
     @Override
@@ -62,5 +66,10 @@ public class Rotacion extends ModuloDinamico {
     @Override
     public void apagar() {
         System.out.println("Módulo de Rotación apagado");
+    }
+
+    @Override
+    public void enviar_respuesta_accion(boolean respuesta) {
+
     }
 }

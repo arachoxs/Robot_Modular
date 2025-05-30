@@ -47,6 +47,11 @@ public class Altavoz extends Actuacion {
     }
 
     @Override
+    public void enviar_respuesta_accion(boolean respuesta) {
+
+    }
+
+    @Override
     public void interpretar_mensaje(String mensaje) {
     }
 }

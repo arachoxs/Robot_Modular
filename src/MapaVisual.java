@@ -391,19 +391,15 @@ public class MapaVisual extends JPanel {
         Global.robot.agregar_sensor_proximidad(5, "prox", "Proximidad", 10, 10, 10, false, 1);
         Global.robot.agregar_altavoz(6, "alt", "Altavoz", 10, 10, 10, false, 1);
 
-        // Crear y mostrar el mapa visual
+        while(true){
+            Global.matriz.actualizarMatriz();
 
-        // Configurar el mapa global para los sensores
-        //Sensor.setMapaGlobal(Global.mapaVisual.getMapa());
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Ingrese el número de pasos a mover: ");
+            int n_pasos = scanner.nextInt();
+            Global.robot.get_modulo_id(1).get_sistema_comunicacion().recibir_mensaje("mover "+n_pasos);
+        }
 
-        // Mostrar la ventana
-        //Global.mapaVisual.mostrar();
 
-        Global.matriz.actualizarMatriz();
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el número de pasos a mover: ");
-        int n_pasos = scanner.nextInt();
-        Global.robot.get_modulo_id(1).get_sistema_comunicacion().recibir_mensaje("mover "+n_pasos);
     }
 }

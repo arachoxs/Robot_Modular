@@ -19,10 +19,13 @@ public class Camara extends Percepcion{
 
     @Override
     public void interpretar_mensaje(String mensaje) {
+        if(mensaje.equals("RECONOCER OBJETO")){
+            this.captar_informacion();
+        }
     }
 
     @Override
-    public int procesar_datos(Object datos) {
+    public int procesar_datos(int datos) {
         // Lógica específica para procesar datos de imagen
         System.out.println("Procesando datos de imagen");
         return 1; // Código de éxito
@@ -39,8 +42,9 @@ public class Camara extends Percepcion{
             return 0; //hay un error en la toma de la informacion
         }else if(cap==1){ //bloque
             //logica para verificar a la derecha y izquierda
+             this.get_sistema_comunicacion().enviar_mensaje(2,"VERIFICAR IZQUIERDA"); //mensaje a rotacion
         }else if(cap==2){ //mascota
-            this.get_sistema_comunicacion().enviar_mensaje(6,"espantar");
+            this.get_sistema_comunicacion().enviar_mensaje(6,"ESPANTAR");
         }
 
         return 1;
@@ -54,6 +58,11 @@ public class Camara extends Percepcion{
     @Override
     public void apagar() {
         System.out.println("Cámara apagada");
+    }
+
+    @Override
+    public void enviar_respuesta_accion(boolean respuesta) {
+
     }
 
 }
