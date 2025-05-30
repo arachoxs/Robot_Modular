@@ -32,7 +32,7 @@ public class SensorProximidad extends Percepcion{
             return 0; //hubo un error en la toma de datos
         }
         else if(scan==0){ //hay aire
-            this.get_sistema_comunicacion().enviar_mensaje(1,"mover fijo"); //envia mensaje a ext para que se mueva fijo 1.
+            this.get_sistema_comunicacion().enviar_mensaje(1,"MOVER FIJO"); //envia mensaje a ext para que se mueva fijo 1.
         }
         else{ //existe algo diferente a aire se tiene que verificar que es
             this.get_sistema_comunicacion().enviar_mensaje(4,"verificar objeto");
@@ -43,6 +43,9 @@ public class SensorProximidad extends Percepcion{
 
     @Override
     public void interpretar_mensaje(String mensaje) {
+        if(mensaje=="Verificar"){
+            this.captar_informacion();
+        }
     }
 
     @Override

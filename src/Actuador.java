@@ -2,6 +2,7 @@ public class Actuador {
     private int id;
     private String tipo;
     private String descripcion;
+    private static Mapa mapaGlobal; // Referencia al mapa global
 
     public Actuador(int id, String tipo, String descripcion) {
         this.id = id;
@@ -10,7 +11,11 @@ public class Actuador {
     }
 
     public int realizar_accion() {
-        // Lógica específica según el tipo de actuador
+        int[] direccionActual = Global.robot.getDireccion();
+        int[] posicionActuaal = Global.robot.getPos();
+        //if(!Global.mapaGlobal.emitir_sonido(direccionActual[0],direccionActual[1])){
+        //    return 0;
+        //}
         return 1; // Código de éxito
     }
 

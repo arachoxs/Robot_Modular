@@ -24,7 +24,7 @@ public class SistemaControl {
     public void interpretar(String mensaje){
         System.out.println("Interpretando mensaje en módulo " + modulo_propietario.get_id() + ": " + mensaje);
         //this.modulo_propietario.interpretar_mensaje(mensaje);
-        informar_accion();
+        this.modulo_propietario.interpretar_mensaje(mensaje);
     }
 
     public void informar_accion() {

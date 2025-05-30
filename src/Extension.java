@@ -25,15 +25,46 @@ public class Extension extends ModuloDinamico {
 
     public boolean mueve_un_paso(){
         int[] direccionActual = Global.robot.getDireccion();
-        int[] posicionActuaal = Global.robot.getPos();
+        int[] posicionActual = Global.robot.getPos();
 
-        Global.robot.setPos(direccionActual[0]+posicionActuaal[0]*1,direccionActual[1]+posicionActuaal[1]*1);
+        // Limpiar la celda actual
+        Global.matriz.setCelda(posicionActual[1], posicionActual[0], 0);
+
+        // Calcular nueva posición
+        int nuevoX = posicionActual[0] + direccionActual[0];
+        int nuevoY = posicionActual[1] + direccionActual[1];
+
+        // Mover el robot
+        Global.robot.setPos(nuevoX, nuevoY);
+
+        Global.matriz.actualizarMatriz();
 
         return true;
     }
 
     @Override
     public void interpretar_mensaje(String mensaje) {
+        if(mensaje.equals("MOVER FIJO")){
+            this.mueve_un_paso();
+        }
+
+        if (mensaje.startsWith("mover")) {
+            // Extraer lo que viene después del "+"
+
+            // Extraer lo que viene después de "mover"
+            String numeroStr = mensaje.substring("mover".length()).trim(); // Elimina espacios
+
+// Convertir a entero
+
+
+            // Convertir a entero
+            int pasos = Integer.parseInt(numeroStr);
+
+            this.moverse(pasos);
+
+        } else {
+            System.out.println("Mensaje no reconocido");
+        }
         System.out.println("Movimiento");
     }
 

@@ -37,6 +37,10 @@ public class Camara extends Percepcion{
 
         if(cap==-1){
             return 0; //hay un error en la toma de la informacion
+        }else if(cap==1){ //bloque
+            //logica para verificar a la derecha y izquierda
+        }else if(cap==2){ //mascota
+            this.get_sistema_comunicacion().enviar_mensaje(6,"espantar");
         }
 
         return 1;

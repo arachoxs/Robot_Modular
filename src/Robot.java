@@ -17,12 +17,16 @@ public class Robot {
         this.modulos = new java.util.ArrayList<>();
         this.encendido = false;
 
-        //Inicializar posicion y direccion
-        this.pos[0] = 15;
-        this.pos[1] = 15;
+        this.pos = new int[2];
+        this.direccion = new int[2];
 
-        this.direccion[0] = 0;
-        this.direccion[1] = 1;
+        //Inicializar posicion y direccion
+        this.pos[0] = 0;//x
+        this.pos[1] = 0;//y
+
+        this.direccion[0] = 1;//x
+        this.direccion[1] = 0;//y
+
         //no se agregan modulos por defecto - todos se agregaran desde agregarModulo
     }
 

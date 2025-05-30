@@ -14,7 +14,7 @@ public class SistemaComunicacion {
 
     public void recibir_mensaje(String mensaje){ //recibe un mensaje de otro modulo
         System.out.println("Mensaje recibido en módulo " + modulo_propietario.get_referencia() + ": " + mensaje);
-        //this.modulo_propietario.get_sistema_control().interpretar(mensaje);
+        this.modulo_propietario.get_sistema_control().interpretar(mensaje);
     }
 
     public void enviar_mensaje(int receptor , String mensaje){

@@ -3,21 +3,29 @@ public class Sensor {
     private String tipo;
     private String descripcion;
 
+
     public Sensor(int id, String tipo, String descripcion) {
         this.id = id;
         this.tipo = tipo;
         this.descripcion = descripcion;
     }
 
-    public int captar_informacion(){
-        int[] direccionActual = Global.robot.getDireccion();
-        int[] posicionActuaal = Global.robot.getPos();
-        // Lógica específica según el tipo de sensor
-        if(direccionActual[0]==0){
-            return matriz[posicionActuaal[0]][posicionActuaal[1]+1];
-        }
+    public static void setMapaGlobal(Mapa mapa) {
+        Global.mapaGlobal = mapa;
+    }
 
-        return matriz[posicionActuaal[0]+1][posicionActuaal[1]];
+    public int captar_informacion(){
+        if (Global.mapaGlobal == null) return -1;
+
+        int[] direccionActual = Global.robot.getDireccion();
+        int[] posicionActual = Global.robot.getPos();
+
+        int filaObjetivo = posicionActual[0] + direccionActual[0];
+        int columnaObjetivo = posicionActual[1] + direccionActual[1];
+
+
+
+        return Global.matriz.getCelda(filaObjetivo, columnaObjetivo);
     }
 
     // Getters y Setters

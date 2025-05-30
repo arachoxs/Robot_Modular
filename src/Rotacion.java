@@ -13,10 +13,10 @@ public class Rotacion extends ModuloDinamico {
 
         // Definir las 4 direcciones posibles en orden horario
         int[][] direcciones = {
-                {0, 1},   // Derecha
-                {1, 0},   // Abajo
-                {0, -1},  // Izquierda
-                {-1, 0}   // Arriba
+                { 0, 1 }, // Derecha
+                { 1, 0 }, // Abajo
+                { 0, -1 }, // Izquierda
+                { -1, 0 } // Arriba
         };
 
         // Encontrar el índice de la dirección actual
@@ -28,8 +28,9 @@ public class Rotacion extends ModuloDinamico {
             }
         }
 
-        // Calcular cuántos giros de 90° hay que hacer
-        int pasos = grados / 90;
+        // Redondear los grados al múltiplo de 90 más cercano
+        int pasos = (int) Math.round(grados / 90.0);
+
         // Ajustar para negativos y normalizar a 0-3
         int nuevoIndice = (indiceActual + pasos) % 4;
         if (nuevoIndice < 0) {

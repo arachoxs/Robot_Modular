@@ -20,13 +20,20 @@ public class Altavoz extends Actuacion {
 
     @Override
     public int realizar_accion() {
-        int retorno;
+        int retorno=0;
 
         for(Actuador actuador : actuadores){
             retorno = actuador.realizar_accion();
         }
 
-        return 1;
+        if(retorno==0){//accion fallida hubieron errores
+            return 0;
+        }
+        else{
+            System.out.println("Accion completada con exito");
+        }
+
+        return 1; //accion completada con exito
     }
 
     @Override
