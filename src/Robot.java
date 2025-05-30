@@ -17,7 +17,82 @@ public class Robot {
         this.modulos = new java.util.ArrayList<>();
         this.encendido = false;
 
+        //Inicializar posicion y direccion
+        this.pos[0] = 15;
+        this.pos[1] = 15;
+
+        this.direccion[0] = 0;
+        this.direccion[1] = 1;
         //no se agregan modulos por defecto - todos se agregaran desde agregarModulo
+    }
+
+// Getters y Setters
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<Modulo> getModulos() {
+        return modulos;
+    }
+
+    public void setModulos(List<Modulo> modulos) {
+        this.modulos = modulos;
+    }
+
+    public int[] getPos() {
+        return pos.clone();
+    }
+
+    public void setPos(int[] pos) {
+        if (pos != null && pos.length == 2) {
+            //this.pos[0] = pos[0];
+            //this.pos[1] = pos[1];
+        }
+    }
+
+    public void setPos(int fila, int columna) {
+        this.pos[0] = fila;
+        this.pos[1] = columna;
+    }
+
+    public int[] getDireccion() {
+        return direccion.clone();
+    }
+
+    public void setDireccion(int[] direccion) {
+        if (direccion != null && direccion.length == 2) {
+            //this.direccion[0] = direccion[0];
+            //.direccion[1] = direccion[1];
+        }
+    }
+
+    public boolean isEncendido() {
+        return encendido;
+    }
+
+    public void setEncendido(boolean encendido) {
+        this.encendido = encendido;
     }
 
     public void agregar_modulo(Modulo modulo){
