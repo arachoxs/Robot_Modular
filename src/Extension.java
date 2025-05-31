@@ -40,6 +40,23 @@ public class Extension extends ModuloDinamico {
         return true;
     }
 
+    public boolean mover_reversa(){
+        int[] direccionActual = Global.robot.getDireccion();
+        int[] posicionActual = Global.robot.getPos();
+
+        // Calcular nueva posición
+        int nuevoX = posicionActual[0] - direccionActual[0];
+        int nuevoY = posicionActual[1] - direccionActual[1]*-1;
+
+        // Mover el robot
+        Global.robot.setPos(nuevoX, nuevoY);
+
+        Global.mapa.actualizar_posicion_robot();
+        Global.mapa.imprimir_mapa();
+
+        return true;
+    }
+
     @Override
     public void interpretar_mensaje(String mensaje) {
         boolean resultadoAccion = false;
@@ -54,7 +71,10 @@ public class Extension extends ModuloDinamico {
                 int pasos = extraerPasos(mensaje);
                 resultadoAccion = this.moverse(pasos);
 
-            } else {
+            } else if(mensaje.equals("REVERSA")){
+                resultadoAccion = this.mover_reversa();
+            }
+            else {
                 System.out.println("Mensaje no reconocido: " + mensaje);
             }
 

@@ -36,20 +36,17 @@ public class Camara extends Percepcion{
         if(datos==1){ //bloque
             if(instruccion.equals("RECONOCER OBJETO")){
                 this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA");
-            } else if(instruccion.equals("IZQUIERDA FALLIDO")){
-                System.out.println("hola");
+            }else if(instruccion.equals("IZQUIERDA FALLIDO")){
                 this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FALLIDA");
-            }
-        }else{ //mascota
-            if(instruccion.equals("VERIFICAR IZQUIERDA") && datos==1){
-                if(instruccion.equals("VERIFICAR IZQUIERDA")){
-                    this.get_sistema_control().enviar_respuesta_accion(4,"IZQUIERDA FALLIDO");
-                }
+            }else if(instruccion.equals("DERECHA FALLIDO")){
+                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FIJA");
+                this.get_sistema_control().enviar_respuesta_accion(1,"REVERSA");
+                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA");
+
 
             }
-            else{
-                this.get_sistema_control().enviar_respuesta_accion(4,"RECONOCER OBJETO");
-            }
+        }else{ //mascota
+            this.get_sistema_control().enviar_respuesta_accion(6,"ESPANTAR");
         }
 
         return 1;

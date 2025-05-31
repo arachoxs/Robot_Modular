@@ -53,5 +53,9 @@ public class Altavoz extends Actuacion {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
+        if(mensaje.equals("ESPANTAR")){
+            this.realizar_accion();
+            this.get_sistema_control().enviar_respuesta_accion(1,"MOVER FIJO");
+        }
     }
 }

@@ -55,7 +55,10 @@ public class Rotacion extends ModuloDinamico {
         if(mensaje.equals("ROTACION IZQUIERDA")){
             moverse(-90);
             this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR IZQUIERDA");
-        }else if(mensaje.equals("ROTACION IZQUIERDA FALLIDA")){
+        }else if(mensaje.equals("ROTACION IZQUIERDA FIJA")){
+            moverse(-90);
+        }
+        else if(mensaje.equals("ROTACION IZQUIERDA FALLIDA")){
             moverse(180);
             this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR DERECHA");
         }

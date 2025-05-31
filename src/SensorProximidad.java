@@ -26,9 +26,8 @@ public class SensorProximidad extends Percepcion{
         }else{
             if(instruccion.equals("VERIFICAR IZQUIERDA")){
                 this.get_sistema_control().enviar_respuesta_accion(4,"IZQUIERDA FALLIDO");
-            }else if(instruccion.equals("VERIFICAR DERECHA")){ //logica de encerrado , helicoidal
-                //Mira izquierda -> hay obstaculo? Si -> Mira derecha -> hay obstaculo? Si -> Retrocede un paso
-                this.get_sistema_control().enviar_respuesta_accion(3,"ENCERRADO");
+            }else if(instruccion.equals("VERIFICAR DERECHA")){
+                this.get_sistema_control().enviar_respuesta_accion(4,"DERECHA FALLIDO");
             }else{
                 this.get_sistema_control().enviar_respuesta_accion(4,"RECONOCER OBJETO");
             }
