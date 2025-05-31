@@ -10,12 +10,9 @@ public class Extension extends ModuloDinamico {
     @Override
     public boolean moverse(int n_pasos, int grados , int pasos_giro) {
         // Lógica específica para movimiento de extensión (línea recta)
-        if (Global.log) {
-            if (n_pasos == 1) System.out.println("Moviéndose en línea recta: " + n_pasos + " metro");
-            else System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
-        }
+        System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
         for(int i=0; i<n_pasos; i++){
-            this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
+            this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
         }
 
         return true;
@@ -38,7 +35,7 @@ public class Extension extends ModuloDinamico {
         Global.robot.set_pos(nuevoX, nuevoY);
 
         Global.mapa.actualizar_posicion_robot();
-        if (Global.log) Global.mapa.imprimir_mapa();
+        Global.mapa.imprimir_mapa();
 
         return true;
     }
@@ -55,27 +52,29 @@ public class Extension extends ModuloDinamico {
         Global.robot.set_pos(nuevoX, nuevoY);
 
         Global.mapa.actualizar_posicion_robot();
-        if (Global.log) Global.mapa.imprimir_mapa();
+        Global.mapa.imprimir_mapa();
+        Global.pausa();
+
 
         return true;
     }
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        boolean resultado_accion = false;
+        boolean resultadoAccion = false;
 
         try {
             mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
 
             if (mensaje.equals("MOVER FIJO")) {
-                resultado_accion = this.mover_un_paso();
+                resultadoAccion = this.mover_un_paso();
 
             } else if (mensaje.startsWith("MOVER")) {
                 int pasos = extraer_pasos(mensaje);
-                resultado_accion = this.moverse(pasos);
+                resultadoAccion = this.moverse(pasos);
 
             } else if(mensaje.equals("REVERSA")){
-                resultado_accion = this.mover_reversa();
+                resultadoAccion = this.mover_reversa();
             }
             else {
                 System.out.println("Mensaje no reconocido: " + mensaje);
@@ -87,7 +86,7 @@ public class Extension extends ModuloDinamico {
             System.out.println("Error general al interpretar mensaje: " + e.getMessage());
         }
 
-        this.enviar_respuesta_accion(resultado_accion);
+        this.enviar_respuesta_accion(resultadoAccion);
     }
 
     private int extraer_pasos(String mensaje) throws NumberFormatException {
@@ -98,23 +97,21 @@ public class Extension extends ModuloDinamico {
 
     @Override
     public void encender() {
-        this.set_encendido(true);
-        if (Global.log) System.out.println("Módulo de Extensión encendido");
+        System.out.println("Módulo de Extensión encendido");
     }
 
     @Override
     public void apagar() {
-        this.set_encendido(false);
-        if (Global.log) System.out.println("Módulo de Extensión apagado");
+        System.out.println("Módulo de Extensión apagado");
     }
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-        if(respuesta){
-            if (Global.log) System.out.println("Movimiento del robot ejecutado sin problemas.");
+        if(!respuesta){
+            System.out.println("Movimiento del robot ejecutado sin problemas.");
         }
         else{
-            if (Global.log) System.out.println("Error en movimiento detectado, ejecutando gestion de errores.");
+            System.out.println("Error en movimiento detectado, ejecutando gestion de errores.");
             this.gestionar_solucion();
         }
     }

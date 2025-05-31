@@ -14,4 +14,10 @@ public class Global {
     public static final int SENSORPROXIMIDAD = 5;
     public static final int ALTAVOZ = 6;
 
+    //pausa
+    public static void pausa() {
+        System.out.println("Presiona ENTER para continuar...");
+        new java.util.Scanner(System.in).nextLine();
+    }
+
 }
