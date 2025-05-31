@@ -38,6 +38,7 @@ public class Extension extends ModuloDinamico {
         Global.robot.set_pos(nuevoX, nuevoY);
 
         Global.mapa.actualizar_posicion_robot();
+        if (Global.log) Global.mapa.imprimir_mapa();
 
         return true;
     }
@@ -54,7 +55,7 @@ public class Extension extends ModuloDinamico {
         Global.robot.set_pos(nuevoX, nuevoY);
 
         Global.mapa.actualizar_posicion_robot();
-        Global.mapa.imprimir_mapa();
+        if (Global.log) Global.mapa.imprimir_mapa();
 
         return true;
     }
