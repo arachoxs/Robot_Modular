@@ -85,7 +85,7 @@ public class Robot {
         }
     }
 
-    public boolean is_encendido() {
+    public boolean get_encendido() {
         return encendido;
     }
 
@@ -146,7 +146,8 @@ public class Robot {
 
     public void encender(){
         this.encendido = true;
-        System.out.println("Robot " + alias + " encendido");
+        if (Global.log == true) System.out.println("Robot " + alias + " encendido");
+
 
         // Encender primero los módulos dinámicos
         for (Modulo modulo : modulos) {
@@ -165,7 +166,7 @@ public class Robot {
 
     public void apagar(){
         this.encendido = false;
-        System.out.println("Robot " + alias + " apagado");
+        if (Global.log == true) System.out.println("Robot " + alias + " apagado");
 
         // Apagar primero los módulos dinámicos
         for (Modulo modulo : modulos) {

@@ -10,8 +10,10 @@ public class Extension extends ModuloDinamico {
     @Override
     public boolean moverse(int n_pasos, int grados , int pasos_giro) {
         // Lógica específica para movimiento de extensión (línea recta)
-        if (n_pasos == 1) System.out.println("Moviéndose en línea recta: " + n_pasos + " metro");
-        else System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
+        if (Global.log == true) {
+            if (n_pasos == 1) System.out.println("Moviéndose en línea recta: " + n_pasos + " metro");
+            else System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
+        }
         for(int i=0; i<n_pasos; i++){
             this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
         }
@@ -95,21 +97,23 @@ public class Extension extends ModuloDinamico {
 
     @Override
     public void encender() {
-        System.out.println("Módulo de Extensión encendido");
+        this.set_encendido(true);
+        if (Global.log == true) System.out.println("Módulo de Extensión encendido");
     }
 
     @Override
     public void apagar() {
-        System.out.println("Módulo de Extensión apagado");
+        this.set_encendido(false);
+        if (Global.log == true) System.out.println("Módulo de Extensión apagado");
     }
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
         if(respuesta){
-            System.out.println("Movimiento del robot ejecutado sin problemas.");
+            if (Global.log == true) System.out.println("Movimiento del robot ejecutado sin problemas.");
         }
         else{
-            System.out.println("Error en movimiento detectado, ejecutando gestion de errores.");
+            if (Global.log == true) System.out.println("Error en movimiento detectado, ejecutando gestion de errores.");
             this.gestionar_solucion();
         }
     }

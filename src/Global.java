@@ -4,6 +4,7 @@ public class Global {
     public static RedComunicacion red = new RedComunicacion();
     public static Robot robot = new Robot("123", "Phi", "Robotcini Banini");
     public static Mapa mapa = new Mapa();// Referencia al mapa global
+    public static boolean log = false;
 
     //Constantes id módulos
     public static final int EXTENSION = 1;

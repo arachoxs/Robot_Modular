@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -20,6 +21,23 @@ public class Main {
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 
+        Scanner scanner = new Scanner(System.in);
+        String log;
+        while (true) {
+            System.out.printf("¿Desea ver el registro de operaciones realizadas? (S/N)\nSelecciones una opción: ");
+            log = scanner.nextLine();
+
+            if (log.equalsIgnoreCase("s")){
+                Global.log = true;
+                break;
+            } else if (log.equalsIgnoreCase("n")){
+                Global.log = false;
+                break;
+            } else{
+                System.out.println("Por favor ingrese un valor válido.");
+            }
+        }
+
         // Agregar módulos al robot
         Global.robot.agregar_extension(Global.EXTENSION, "Extensión", "Extension por defecto", 10, 10, 10, false, 1);
         Global.robot.agregar_rotacion(Global.ROTACION, "Rotación", "Rotacion por defecto", 10, 10, 10, false, 1);
@@ -29,11 +47,11 @@ public class Main {
         Global.robot.agregar_altavoz(Global.ALTAVOZ, "Altavoz", "Altavoz por defecto", 10, 10, 10, false, 1);
         Global.robot.encender();
 
-        int opcion = 0;
-        while(true){
+        int opcion = -1;
+
+        while(opcion != 0){
             System.out.println("----------------------------------");
             Global.mapa.imprimir_mapa();
-            Scanner scanner = new Scanner(System.in);
             System.out.println("Posición actual del robot: " + Global.robot.get_pos()[0] + " " + Global.robot.get_pos()[1]);
             System.out.println("Dirección actual del robot: " + traducir_direccion(Global.robot.get_direccion()));
             System.out.println("----------------------------------");
@@ -44,17 +62,24 @@ public class Main {
                 case 1:{
                     System.out.print("Ingrese el número de pasos a mover: ");
                     int n_pasos = scanner.nextInt();
+                    if (Global.log == true) System.out.println("\n###############-LOG-##############");
                     Global.robot.get_modulo_id(Global.EXTENSION).get_sistema_comunicacion().recibir_mensaje("MOVER " + n_pasos);
+                    if (Global.log == true) System.out.println("##############-/LOG-##############\n");
                     break;
                 }
                 case 2:{
                     System.out.print("Ingrese el número de grados a girar (sentido horario): ");
                     int grados = scanner.nextInt();
+                    if (Global.log == true) System.out.println("\n###############-LOG-##############");
                     Global.robot.get_modulo_id(Global.ROTACION).get_sistema_comunicacion().recibir_mensaje("ROTAR " + grados);
+                    if (Global.log == true) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                default:{
+                    System.out.println("Por favor ingrese un valor válido.");
                     break;
                 }
             }
-
         }
 
 

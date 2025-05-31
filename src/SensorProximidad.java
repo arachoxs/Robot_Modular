@@ -60,12 +60,14 @@ public class SensorProximidad extends Percepcion{
 
     @Override
     public void encender() {
-        System.out.println("Sensor de Proximidad encendido");
+        this.set_encendido(true);
+        if (Global.log == true) System.out.println("Sensor de Proximidad encendido");
     }
 
     @Override
     public void apagar() {
-        System.out.println("Sensor de Proximidad apagado");
+        this.set_encendido(false);
+        if (Global.log == true) System.out.println("Sensor de Proximidad apagado");
     }
 
     @Override

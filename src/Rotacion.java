@@ -40,7 +40,7 @@ public class Rotacion extends ModuloDinamico {
         // Cambiar la dirección del robot
         Global.robot.set_direccion(direcciones[nuevo_indice]);
 
-        System.out.println("Robot giró " + grados + " grados. Nueva dirección: [" +
+        if (Global.log == true) System.out.println("Robot giró " + grados + " grados. Nueva dirección: [" +
                 direcciones[nuevo_indice][0] + "," + direcciones[nuevo_indice][1] + "]");
 
         return true;
@@ -90,12 +90,14 @@ public class Rotacion extends ModuloDinamico {
 
     @Override
     public void encender() {
-        System.out.println("Módulo de Rotación encendido");
+        this.set_encendido(true);
+        if (Global.log == true) System.out.println("Módulo de Rotación encendido");
     }
 
     @Override
     public void apagar() {
-        System.out.println("Módulo de Rotación apagado");
+        this.set_encendido(false);
+        if (Global.log == true) System.out.println("Módulo de Rotación apagado");
     }
 
     @Override

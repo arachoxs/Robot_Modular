@@ -30,7 +30,7 @@ public class Altavoz extends Actuacion {
             return 0;
         }
         else{
-            System.out.println("Accion completada con exito");
+            if (Global.log == true) System.out.println("Accion completada con exito");
         }
 
         return 1; //accion completada con exito
@@ -38,12 +38,14 @@ public class Altavoz extends Actuacion {
 
     @Override
     public void encender() {
-        System.out.println("Altavoz encendido");
+        this.set_encendido(true);
+        if (Global.log == true) System.out.println("Altavoz encendido");
     }
 
     @Override
     public void apagar() {
-        System.out.println("Altavoz apagado");
+        this.set_encendido(false);
+        if (Global.log == true) System.out.println("Altavoz apagado");
     }
 
     @Override

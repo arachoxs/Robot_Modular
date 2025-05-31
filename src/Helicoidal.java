@@ -11,18 +11,20 @@ public class Helicoidal extends ModuloDinamico {
     @Override
     public boolean moverse(int n_pasos, int grados, int pasos_giro) {
         // Lógica específica para movimiento helicoidal (gira y se traslada)
-        System.out.println("Movimiento helicoidal: " + n_pasos + " unidades");
+        if (Global.log == true) System.out.println("Movimiento helicoidal: " + n_pasos + " unidades");
         return true;
     }
 
     @Override
     public void encender() {
-        System.out.println("Módulo Helicoidal encendido");
+        this.set_encendido(true);
+        if (Global.log == true) System.out.println("Módulo Helicoidal encendido");
     }
 
     @Override
     public void apagar() {
-        System.out.println("Módulo Helicoidal apagado");
+        this.set_encendido(false);
+        if (Global.log == true) System.out.println("Módulo Helicoidal apagado");
     }
 
     @Override

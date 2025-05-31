@@ -11,19 +11,19 @@ public class SistemaControl {
 
     public boolean enviar_respuesta_accion(int id,String mensaje){
         // Lógica para enviar respuesta de acción
-        System.out.println("Sistema de control del módulo " + modulo_propietario.get_referencia() + " enviando acción a seguir");
+        if (Global.log == true) System.out.println("Sistema de control del módulo " + modulo_propietario.get_referencia() + " enviando acción a seguir");
         this.modulo_propietario.get_sistema_comunicacion().enviar_mensaje(id,mensaje);
         return true;
     }
 
     public String gestionar_solucion(){
         // Lógica para gestionar solución cuando hay problemas
-        System.out.println("Gestionando solución en módulo " + modulo_propietario.get_referencia());
+        if (Global.log == true) System.out.println("Gestionando solución en módulo " + modulo_propietario.get_referencia());
         return "Solución gestionada";
     }
 
     public void interpretar(String mensaje){
-        System.out.println("Interpretando mensaje en módulo " + modulo_propietario.get_referencia() + ": " + mensaje);
+        if (Global.log == true) System.out.println("Interpretando mensaje en módulo " + modulo_propietario.get_referencia() + ": " + mensaje);
         this.modulo_propietario.interpretar_mensaje(mensaje);
     }
 
