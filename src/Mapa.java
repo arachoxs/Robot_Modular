@@ -2,8 +2,9 @@ import java.util.Random;
 
 public class Mapa {
     private int[][] matriz;
-    private static final int TAMAÑO = 30;
+    private static final int TAMAÑO = 15;
     private Random random;
+    private int[] posicion_robot;
 
     // Constantes para los tipos de celdas
     public static final int AIRE = 0;
@@ -14,120 +15,70 @@ public class Mapa {
     public Mapa() {
         this.matriz = new int[TAMAÑO][TAMAÑO];
         this.random = new Random();
-        inicializarMapa();
+        inicializar_mapa();
     }
 
-    private void inicializarMapa() {
+    private void inicializar_mapa() {
         // Llenar todo con aire inicialmente
         for (int i = 0; i < TAMAÑO; i++) {
             for (int j = 0; j < TAMAÑO; j++) {
                 matriz[i][j] = AIRE;
             }
         }
+        for (int i = 0; i < TAMAÑO; i++){
+           for (int j = 0; j < TAMAÑO; j++){
+               if (i == 0 || j == 0 || i == TAMAÑO - 1  || j == TAMAÑO - 1)
+                   set_celda(i, j, OBSTACULO);
+           }
+        }
 
         // Generar obstáculos (1/6 de probabilidad)
-        int totalCeldas = TAMAÑO * TAMAÑO;
-        int numObstaculos = totalCeldas / 6;
-
-        for (int i = 0; i < numObstaculos; i++) {
-            int fila, columna;
-            do {
-                fila = random.nextInt(TAMAÑO);
-                columna = random.nextInt(TAMAÑO);
-            } while (matriz[fila][columna] != AIRE || (fila == 15 && columna == 15)); // No colocar en centro
-
-            matriz[fila][columna] = OBSTACULO;
-        }
 
         // Generar mascotas (1/30 de probabilidad)
-        int numMascotas = totalCeldas / 30;
 
-        for (int i = 0; i < numMascotas; i++) {
-            int fila, columna;
-            do {
-                fila = random.nextInt(TAMAÑO);
-                columna = random.nextInt(TAMAÑO);
-            } while (matriz[fila][columna] != AIRE || (fila == 15 && columna == 15)); // No colocar en centro
-
-            matriz[fila][columna] = MASCOTA;
-        }
-
-        // Colocar robot en el centro
-        matriz[15][15] = ROBOT;
+        // Inicializar robot
+        set_celda(Global.robot.getPos()[1], Global.robot.getPos()[0], ROBOT);
+        posicion_robot = Global.robot.getPos();
     }
 
-    public int getCelda(int fila, int columna) {
-        if (esValida(fila, columna)) {
-            return matriz[fila][columna];
+    public void imprimir_mapa() {
+        for (int i = 0; i < TAMAÑO; i++) {
+            for (int j = 0; j < TAMAÑO; j++) {
+                System.out.print(matriz[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public int get_celda(int fila,int columna) {
+        if (es_valida(fila, columna)) {
+            return this.matriz[fila][columna];
         }
         return -1; // Posición inválida
     }
 
-    public void setCelda(int fila, int columna, int valor) {
-        if (esValida(fila, columna)) {
-            matriz[fila][columna] = valor;
+    public void set_celda(int fila,int columna, int valor) {
+        if (es_valida(fila, fila)) {
+            this.matriz[fila][columna] = valor;
         }
     }
 
-    public boolean esValida(int fila, int columna) {
+    public void actualizar_posicion_robot(){
+        int[] posicion_actual = Global.robot.getPos();
+        if (es_valida(posicion_actual[1],posicion_actual[0])) {
+            set_celda(posicion_robot[1], posicion_robot[0], AIRE);
+            set_celda(posicion_actual[1], posicion_actual[0], ROBOT);
+            posicion_robot = posicion_actual;
+        }
+        else{
+            set_celda(posicion_robot[1], posicion_robot[0], AIRE);
+            posicion_robot = posicion_actual;
+        }
+    }
+
+
+    public boolean es_valida(int fila, int columna) {
         return fila >= 0 && fila < TAMAÑO && columna >= 0 && columna < TAMAÑO;
     }
 
-    public boolean esCeldaLibre(int fila, int columna) {
-        return esValida(fila, columna) && matriz[fila][columna] == AIRE;
-    }
-
-    public boolean hayObstaculo(int fila, int columna) {
-        return esValida(fila, columna) && matriz[fila][columna] == OBSTACULO;
-    }
-
-    public boolean hayMascota(int fila, int columna) {
-        return esValida(fila, columna) && matriz[fila][columna] == MASCOTA;
-    }
-
-    public void moverRobot(int filaAnterior, int columnaAnterior, int filaNueva, int columnaNueva) {
-        if (esValida(filaAnterior, columnaAnterior) && esValida(filaNueva, columnaNueva)) {
-            // Limpiar posición anterior (solo si era robot)
-            if (matriz[filaAnterior][columnaAnterior] == ROBOT) {
-                matriz[filaAnterior][columnaAnterior] = AIRE;
-            }
-            // Colocar robot en nueva posición
-            matriz[filaNueva][columnaNueva] = ROBOT;
-        }
-    }
-
-    public int getTamaño() {
-        return TAMAÑO;
-    }
-
-    public int[][] getMatrizCompleta() {
-        // Devolver copia para evitar modificaciones externas
-        int[][] copia = new int[TAMAÑO][TAMAÑO];
-        for (int i = 0; i < TAMAÑO; i++) {
-            System.arraycopy(matriz[i], 0, copia[i], 0, TAMAÑO);
-        }
-        return copia;
-    }
-
-    public void regenerarMapa() {
-        inicializarMapa();
-    }
-
-    public String getEstadisticas() {
-        int aire = 0, obstaculos = 0, mascotas = 0, robots = 0;
-
-        for (int i = 0; i < TAMAÑO; i++) {
-            for (int j = 0; j < TAMAÑO; j++) {
-                switch (matriz[i][j]) {
-                    case AIRE: aire++; break;
-                    case OBSTACULO: obstaculos++; break;
-                    case MASCOTA: mascotas++; break;
-                    case ROBOT: robots++; break;
-                }
-            }
-        }
-
-        return String.format("Aire: %d, Obstáculos: %d, Mascotas: %d, Robots: %d",
-                aire, obstaculos, mascotas, robots);
-    }
 }

@@ -10,12 +10,8 @@ public class Sensor {
         this.descripcion = descripcion;
     }
 
-    public static void setMapaGlobal(Mapa mapa) {
-        Global.mapaGlobal = mapa;
-    }
-
     public int captar_informacion(){
-        if (Global.mapaGlobal == null) return -1;
+        if (Global.mapa == null) return -1;
 
         int[] direccionActual = Global.robot.getDireccion();
         int[] posicionActual = Global.robot.getPos();

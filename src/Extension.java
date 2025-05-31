@@ -23,7 +23,7 @@ public class Extension extends ModuloDinamico {
         return moverse(n_pasos, 0, 0);
     }
 
-    public boolean mueve_un_paso(){
+    public boolean mover_un_paso(){
         int[] direccionActual = Global.robot.getDireccion();
         int[] posicionActual = Global.robot.getPos();
 
@@ -48,7 +48,7 @@ public class Extension extends ModuloDinamico {
             mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
 
             if (mensaje.equals("MOVER FIJO")) {
-                resultadoAccion = this.mueve_un_paso();
+                resultadoAccion = this.mover_un_paso();
 
             } else if (mensaje.startsWith("MOVER")) {
                 int pasos = extraerPasos(mensaje);

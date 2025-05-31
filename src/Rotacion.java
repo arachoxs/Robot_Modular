@@ -46,17 +46,17 @@ public class Rotacion extends ModuloDinamico {
         return true;
     }
 
-    public boolean moverse(int n_pasos, int grados){
+    public boolean moverse(int grados){
         return moverse(0, grados, 0);
     }
 
     @Override
     public void interpretar_mensaje(String mensaje) {
         if(mensaje.equals("ROTACION IZQUIERDA")){
-            moverse(0, -90);
+            moverse(-90);
             this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR IZQUIERDA");
         }else if(mensaje.equals("ROTACION IZQUIERDA FALLIDA")){
-            moverse(0,180);
+            moverse(180);
             this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR DERECHA");
         }
     }
