@@ -17,7 +17,7 @@ public class SistemaComunicacion {
         this.modulo_propietario.get_sistema_control().interpretar(mensaje);
     }
 
-    public void enviar_mensaje(int receptor , String mensaje){
+    public void enviar_mensaje(int receptor, String mensaje){
         this.red.enviar_mensaje(receptor,mensaje);
     }
 

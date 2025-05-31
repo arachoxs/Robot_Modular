@@ -61,8 +61,32 @@ public class Rotacion extends ModuloDinamico {
         else if(mensaje.equals("ROTACION IZQUIERDA FALLIDA")){
             moverse(180);
             this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR DERECHA");
+        }else{
+            try {
+                mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
+
+                if (mensaje.startsWith("ROTAR")) {
+                    int grados = extraer_grados(mensaje);
+                    moverse(grados);
+                }
+                else {
+                    System.out.println("Mensaje no reconocido: " + mensaje);
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: número de grados inválido.");
+            } catch (Exception e) {
+                System.out.println("Error general al interpretar mensaje: " + e.getMessage());
+            }
         }
     }
+
+    private int extraer_grados(String mensaje) throws NumberFormatException {
+        String numeroStr = mensaje.substring("ROTAR".length()).trim();
+        return Integer.parseInt(numeroStr);
+    }
+
+
 
     @Override
     public void encender() {

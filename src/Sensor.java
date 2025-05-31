@@ -20,11 +20,11 @@ public class Sensor {
         int filaObjetivo = posicionActual[1] + direccionActual[1]*-1;
 
         //System.out.println("Posicion actual: " + posicionActual[0] + " " + posicionActual[1] + "");
-        System.out.println("Informacion captada en fila " + filaObjetivo + ", columna " + columnaObjetivo + "");
+        System.out.println("Información captada en fila " + filaObjetivo + ", columna " + columnaObjetivo + "");
 
         int informacion = Global.mapa.get_celda(filaObjetivo, columnaObjetivo);
 
-        System.out.println("Informacion captada: " + informacion + "");
+        System.out.println("Información captada: " + informacion + "");
         return informacion;
     }
 
