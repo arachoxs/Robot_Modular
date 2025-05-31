@@ -8,7 +8,7 @@ public class Main {
         for (int i = 5; i < 10; i++){
             Global.mapa.set_celda(2, i, 1);
         }
-        Global.mapa.set_celda(2, 8, 0);
+        Global.mapa.set_celda(2, 6, 0);
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 

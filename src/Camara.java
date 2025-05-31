@@ -25,6 +25,9 @@ public class Camara extends Percepcion{
         else if(mensaje.equals("IZQUIERDA FALLIDO")){
             this.procesar_datos(captar_informacion(),"IZQUIERDA FALLIDO");
         }
+        else if(mensaje.equals("DERECHA FALLIDO")){
+            this.procesar_datos(captar_informacion(),"DERECHA FALLIDO");
+        }
     }
 
     @Override
@@ -40,6 +43,7 @@ public class Camara extends Percepcion{
                 this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FALLIDA");
             }else if(instruccion.equals("DERECHA FALLIDO")){
                 this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FIJA");
+                System.out.println("hola");
                 this.get_sistema_control().enviar_respuesta_accion(1,"REVERSA");
                 this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA");
 
