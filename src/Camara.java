@@ -22,32 +22,48 @@ public class Camara extends Percepcion{
         if(mensaje.equals("RECONOCER OBJETO")){
             this.captar_informacion();
         }
+        else if(mensaje.equals("VERIFICAR IZQUIERDA")){
+            this.procesar_datos(captar_informacion(),"VERIFICAR IZQUIERDA");
+        }
     }
 
     @Override
-    public int procesar_datos(int datos) {
-        // Lógica específica para procesar datos de imagen
-        System.out.println("Procesando datos de imagen");
-        return 1; // Código de éxito
+    public int procesar_datos(int datos,String instruccion) {
+        if(datos==-1){
+            return 0;
+        }
+
+        if(datos==1){ //bloque
+            if(instruccion.equals("VERIFICAR IZQUIERDA")){
+                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA");
+            }else if(instruccion.equals("IZQUIERDA FALLIDO")){
+                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FALLIDA");
+            }
+            this.get_sistema_comunicacion().enviar_mensaje(1,"MOVER FIJO");
+        }else{ //mascota
+            if(instruccion.equals("VERIFICAR IZQUIERDA") && datos==1){
+                if(instruccion.equals("VERIFICAR IZQUIERDA")){
+                    this.get_sistema_control().enviar_respuesta_accion(4,"IZQUIERDA FALLIDO");
+                }
+
+            }
+            else{
+                this.get_sistema_control().enviar_respuesta_accion(4,"RECONOCER OBJETO");
+            }
+        }
+
+        return 1;
     }
 
     @Override
     public int captar_informacion() {
-        int cap=-1;
-        for(Sensor sensor : sensores){
-            cap = sensor.captar_informacion();
+        int scan=-1;
+
+        for (Sensor sensor : sensores){
+            scan = sensor.captar_informacion();
         }
 
-        if(cap==-1){
-            return 0; //hay un error en la toma de la informacion
-        }else if(cap==1){ //bloque
-            //logica para verificar a la derecha y izquierda
-             this.get_sistema_comunicacion().enviar_mensaje(2,"VERIFICAR IZQUIERDA"); //mensaje a rotacion
-        }else if(cap==2){ //mascota
-            this.get_sistema_comunicacion().enviar_mensaje(6,"ESPANTAR");
-        }
-
-        return 1;
+        return scan;
     }
 
     @Override

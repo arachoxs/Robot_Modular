@@ -52,9 +52,12 @@ public class Rotacion extends ModuloDinamico {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje.equals("ROTAR IZQUIERDA")){
+        if(mensaje.equals("ROTACION IZQUIERDA")){
             moverse(0, -90);
-            this.get_sistema_comunicacion().enviar_mensaje(5,"VERIFICAR IZQUIERDA");
+            this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR IZQUIERDA");
+        }else if(mensaje.equals("ROTACION IZQUIERDA FALLIDA")){
+            moverse(0,180);
+            this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR DERECHA");
         }
     }
 
@@ -72,4 +75,5 @@ public class Rotacion extends ModuloDinamico {
     public void enviar_respuesta_accion(boolean respuesta) {
 
     }
+
 }

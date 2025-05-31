@@ -9,9 +9,10 @@ public class SistemaControl {
     public Modulo get_modulo_propietario() { return modulo_propietario; }
     public void set_modulo_propietario(Modulo modulo_propietario) { this.modulo_propietario = modulo_propietario; }
 
-    public boolean enviar_respuesta_accion(){
+    public boolean enviar_respuesta_accion(int id,String mensaje){
         // Lógica para enviar respuesta de acción
-        System.out.println("Sistema de control del módulo " + modulo_propietario.get_id() + " enviando respuesta");
+        System.out.println("Sistema de control del módulo " + modulo_propietario.get_id() + " enviando accion a seguir");
+        this.modulo_propietario.get_sistema_comunicacion().enviar_mensaje(id,mensaje);
         return true;
     }
 
@@ -27,8 +28,4 @@ public class SistemaControl {
         this.modulo_propietario.interpretar_mensaje(mensaje);
     }
 
-    public void informar_accion() {
-        // Lógica para informar acción al módulo
-        System.out.println("Informando acción al módulo " + modulo_propietario.get_id());
-    }
 }

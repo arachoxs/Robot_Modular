@@ -12,7 +12,7 @@ public class Extension extends ModuloDinamico {
         // Lógica específica para movimiento de extensión (línea recta)
         System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
         for(int i=0; i<n_pasos; i++){
-            this.get_sistema_comunicacion().enviar_mensaje(5,"Verificar"); //manda mensaje para que verifique alfrente a proximidad
+            this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
         }
 
         return true;
@@ -87,7 +87,7 @@ public class Extension extends ModuloDinamico {
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-        if(respuesta){
+        if(!respuesta){
             System.out.println("Movimiento del robot ejecutado sin problemas.");
         }
         else{
