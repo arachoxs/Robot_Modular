@@ -45,10 +45,11 @@ public class Main {
         Global.robot.agregar_camara(Global.CAMARA, "Cámara", "Camara por defecto", 10, 10, 10, false, 1);
         Global.robot.agregar_sensor_proximidad(Global.SENSORPROXIMIDAD, "Sensor de Proximidad", "Sensor de Proximidad por defecto", 10, 10, 10, false, 1);
         Global.robot.agregar_altavoz(Global.ALTAVOZ, "Altavoz", "Altavoz por defecto", 10, 10, 10, false, 1);
+        if (Global.log) System.out.println("\n###############-LOG-##############");
         Global.robot.encender();
+        if (Global.log) System.out.println("##############-/LOG-##############\n");
 
         int opcion = -1;
-
         while(opcion != 0){
             System.out.println("----------------------------------");
             Global.mapa.imprimir_mapa();
