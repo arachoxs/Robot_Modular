@@ -32,8 +32,6 @@ public class Helicoidal extends ModuloDinamico {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje.equals("ENCERRADO")){
-            System.out.println("ROBOT MK");
-        }
+
     }
 }

@@ -16,20 +16,20 @@ public class SensorProximidad extends Percepcion{
     }
 
 
-    public int procesar_datos(int datos,String instruccion) {
-        if(datos==-1){
+    public int procesar_datos(int datos, String instruccion) {
+        if(datos == -1){
             return 0;
         }
 
-        if(datos==0){
-            this.get_sistema_comunicacion().enviar_mensaje(1,"MOVER FIJO");
+        if(datos == 0){
+            this.get_sistema_comunicacion().enviar_mensaje(Global.EXTENSION,"MOVER FIJO");
         }else{
             if(instruccion.equals("VERIFICAR IZQUIERDA")){
-                this.get_sistema_control().enviar_respuesta_accion(4,"IZQUIERDA FALLIDO");
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"IZQUIERDA FALLIDO");
             }else if(instruccion.equals("VERIFICAR DERECHA")){
-                this.get_sistema_control().enviar_respuesta_accion(4,"DERECHA FALLIDO");
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"DERECHA FALLIDO");
             }else{
-                this.get_sistema_control().enviar_respuesta_accion(4,"RECONOCER OBJETO");
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"RECONOCER OBJETO");
             }
         }
 
@@ -38,7 +38,7 @@ public class SensorProximidad extends Percepcion{
 
     @Override
     public int captar_informacion() {
-        int scan=-1;
+        int scan = -1;
 
         for (Sensor sensor : sensores){
             scan = sensor.captar_informacion();

@@ -12,7 +12,7 @@ public class Extension extends ModuloDinamico {
         // Lógica específica para movimiento de extensión (línea recta)
         System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
         for(int i=0; i<n_pasos; i++){
-            this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
+            this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
         }
 
         return true;
@@ -59,20 +59,20 @@ public class Extension extends ModuloDinamico {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        boolean resultadoAccion = false;
+        boolean resultado_accion = false;
 
         try {
             mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
 
             if (mensaje.equals("MOVER FIJO")) {
-                resultadoAccion = this.mover_un_paso();
+                resultado_accion = this.mover_un_paso();
 
             } else if (mensaje.startsWith("MOVER")) {
                 int pasos = extraer_pasos(mensaje);
-                resultadoAccion = this.moverse(pasos);
+                resultado_accion = this.moverse(pasos);
 
             } else if(mensaje.equals("REVERSA")){
-                resultadoAccion = this.mover_reversa();
+                resultado_accion = this.mover_reversa();
             }
             else {
                 System.out.println("Mensaje no reconocido: " + mensaje);
@@ -84,7 +84,7 @@ public class Extension extends ModuloDinamico {
             System.out.println("Error general al interpretar mensaje: " + e.getMessage());
         }
 
-        this.enviar_respuesta_accion(resultadoAccion);
+        this.enviar_respuesta_accion(resultado_accion);
     }
 
     private int extraer_pasos(String mensaje) throws NumberFormatException {
@@ -105,7 +105,7 @@ public class Extension extends ModuloDinamico {
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-        if(!respuesta){
+        if(respuesta){
             System.out.println("Movimiento del robot ejecutado sin problemas.");
         }
         else{

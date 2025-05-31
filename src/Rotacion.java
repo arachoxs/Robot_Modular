@@ -1,5 +1,5 @@
 public class Rotacion extends ModuloDinamico {
-
+    //La convención usada para los grados es la siguiente: Positivo en sentido horario, negativo en sentido antihorario.
     //Constructor
     public Rotacion(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_motores) {
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_motores);
@@ -9,7 +9,7 @@ public class Rotacion extends ModuloDinamico {
     @Override
     public boolean moverse(int n_pasos, int grados , int pasos_giro) {
         // Obtener la dirección actual del robot
-        int[] direccionActual = Global.robot.get_direccion();
+        int[] direccion_actual = Global.robot.get_direccion();
 
         // Definir las 4 direcciones posibles en orden horario
         int[][] direcciones = {
@@ -20,10 +20,10 @@ public class Rotacion extends ModuloDinamico {
         };
 
         // Encontrar el índice de la dirección actual
-        int indiceActual = 0;
+        int indice_actual = 0;
         for (int i = 0; i < 4; i++) {
-            if (direccionActual[0] == direcciones[i][0] && direccionActual[1] == direcciones[i][1]) {
-                indiceActual = i;
+            if (direccion_actual[0] == direcciones[i][0] && direccion_actual[1] == direcciones[i][1]) {
+                indice_actual = i;
                 break;
             }
         }
@@ -32,16 +32,16 @@ public class Rotacion extends ModuloDinamico {
         int pasos = (int) Math.round(grados / 90.0);
 
         // Ajustar para negativos y normalizar a 0-3
-        int nuevoIndice = (indiceActual + pasos) % 4;
-        if (nuevoIndice < 0) {
-            nuevoIndice += 4;
+        int nuevo_indice = (indice_actual + pasos) % 4;
+        if (nuevo_indice < 0) {
+            nuevo_indice += 4;
         }
 
         // Cambiar la dirección del robot
-        Global.robot.set_direccion(direcciones[nuevoIndice]);
+        Global.robot.set_direccion(direcciones[nuevo_indice]);
 
         System.out.println("Robot giró " + grados + " grados. Nueva dirección: [" +
-                direcciones[nuevoIndice][0] + "," + direcciones[nuevoIndice][1] + "]");
+                direcciones[nuevo_indice][0] + "," + direcciones[nuevo_indice][1] + "]");
 
         return true;
     }
@@ -54,14 +54,13 @@ public class Rotacion extends ModuloDinamico {
     public void interpretar_mensaje(String mensaje) {
         if(mensaje.equals("ROTACION IZQUIERDA")){
             moverse(-90);
-            this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR IZQUIERDA");
+            this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR IZQUIERDA");
         }else if(mensaje.equals("ROTACION IZQUIERDA FIJA")){
             moverse(-90);
-
         }
         else if(mensaje.equals("ROTACION IZQUIERDA FALLIDA")){
             moverse(180);
-            this.get_sistema_control().enviar_respuesta_accion(5,"VERIFICAR DERECHA");
+            this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR DERECHA");
         }
     }
 

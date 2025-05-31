@@ -38,19 +38,16 @@ public class Camara extends Percepcion{
 
         if(datos==1){ //bloque
             if(instruccion.equals("RECONOCER OBJETO")){
-                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA");
             }else if(instruccion.equals("IZQUIERDA FALLIDO")){
-                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FALLIDA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA FALLIDA");
             }else if(instruccion.equals("DERECHA FALLIDO")){
-                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FIJA");
-                System.out.println("hola");
-                this.get_sistema_control().enviar_respuesta_accion(1,"REVERSA");
-                this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA");
-
-
+                this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA FIJA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.EXTENSION,"REVERSA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA");
             }
         }else{ //mascota
-            this.get_sistema_control().enviar_respuesta_accion(6,"ESPANTAR");
+            this.get_sistema_control().enviar_respuesta_accion(Global.ALTAVOZ,"ESPANTAR");
         }
 
         return 1;
