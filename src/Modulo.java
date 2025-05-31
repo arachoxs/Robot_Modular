@@ -44,10 +44,10 @@ public abstract class Modulo {
         return this.encendido;
     }
     public int[] get_pos_robot(){
-        return Global.robot.getPos();
+        return Global.robot.get_pos();
     }
     public int[] get_direccion_robot(){
-        return Global.robot.getDireccion();
+        return Global.robot.get_direccion();
     }
 
     public SistemaComunicacion get_sistema_comunicacion(){

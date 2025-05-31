@@ -24,15 +24,15 @@ public class Extension extends ModuloDinamico {
     }
 
     public boolean mover_un_paso(){
-        int[] direccionActual = Global.robot.getDireccion();
-        int[] posicionActual = Global.robot.getPos();
+        int[] direccionActual = Global.robot.get_direccion();
+        int[] posicionActual = Global.robot.get_pos();
 
         // Calcular nueva posición
         int nuevoX = posicionActual[0] + direccionActual[0];
         int nuevoY = posicionActual[1] + direccionActual[1]*-1;
 
         // Mover el robot
-        Global.robot.setPos(nuevoX, nuevoY);
+        Global.robot.set_pos(nuevoX, nuevoY);
 
         Global.mapa.actualizar_posicion_robot();
         Global.mapa.imprimir_mapa();
@@ -41,15 +41,15 @@ public class Extension extends ModuloDinamico {
     }
 
     public boolean mover_reversa(){
-        int[] direccionActual = Global.robot.getDireccion();
-        int[] posicionActual = Global.robot.getPos();
+        int[] direccionActual = Global.robot.get_direccion();
+        int[] posicionActual = Global.robot.get_pos();
 
         // Calcular nueva posición
         int nuevoX = posicionActual[0] - direccionActual[0];
         int nuevoY = posicionActual[1] - direccionActual[1]*-1;
 
         // Mover el robot
-        Global.robot.setPos(nuevoX, nuevoY);
+        Global.robot.set_pos(nuevoX, nuevoY);
 
         Global.mapa.actualizar_posicion_robot();
         Global.mapa.imprimir_mapa();
@@ -68,7 +68,7 @@ public class Extension extends ModuloDinamico {
                 resultadoAccion = this.mover_un_paso();
 
             } else if (mensaje.startsWith("MOVER")) {
-                int pasos = extraerPasos(mensaje);
+                int pasos = extraer_pasos(mensaje);
                 resultadoAccion = this.moverse(pasos);
 
             } else if(mensaje.equals("REVERSA")){
@@ -87,7 +87,7 @@ public class Extension extends ModuloDinamico {
         this.enviar_respuesta_accion(resultadoAccion);
     }
 
-    private int extraerPasos(String mensaje) throws NumberFormatException {
+    private int extraer_pasos(String mensaje) throws NumberFormatException {
         String numeroStr = mensaje.substring("MOVER".length()).trim();
         return Integer.parseInt(numeroStr);
     }

@@ -11,40 +11,40 @@ public class Usuario {
     }
 
     //Getters
-    public int getId() {
+    public int get_id() {
         return id;
     }
-    public String getAlias() {
+    public String get_alias() {
         return alias;
     }
-    public String getTipo() {
+    public String get_tipo() {
         return tipo;
     }
 
     //Setters
-    public void setId(int id) {
+    public void set_id(int id) {
         this.id = id;
     }
-    public void setAlias(String alias) {
+    public void set_alias(String alias) {
         this.alias = alias;
     }
-    public void setTipo(String tipo) {
+    public void set_tipo(String tipo) {
         this.tipo = tipo;
     }
 
-    public void enviarMensaje(String mensaje) {
+    public void enviar_mensaje(String mensaje) {
         // Implementación para enviar mensaje
     }
 
-    public void recibirMensaje(String mensaje) {
+    public void recibir_mensaje(String mensaje) {
         // Implementación para recibir mensaje
     }
 
-    public void encenderRobot(Robot robot) {
+    public void encender_robot(Robot robot) {
         robot.encender();
     }
 
-    public void apagarRobot(Robot robot) {
+    public void apagar_robot(Robot robot) {
         robot.apagar();
     }
 

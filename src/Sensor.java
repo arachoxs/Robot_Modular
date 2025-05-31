@@ -13,8 +13,8 @@ public class Sensor {
     public int captar_informacion(){
         if (Global.mapa == null) return -1;
 
-        int[] direccionActual = Global.robot.getDireccion();
-        int[] posicionActual = Global.robot.getPos();
+        int[] direccionActual = Global.robot.get_direccion();
+        int[] posicionActual = Global.robot.get_pos();
 
         int columnaObjetivo = posicionActual[0] + direccionActual[0];
         int filaObjetivo = posicionActual[1] + direccionActual[1]*-1;

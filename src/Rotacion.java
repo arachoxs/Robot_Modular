@@ -9,7 +9,7 @@ public class Rotacion extends ModuloDinamico {
     @Override
     public boolean moverse(int n_pasos, int grados , int pasos_giro) {
         // Obtener la dirección actual del robot
-        int[] direccionActual = Global.robot.getDireccion();
+        int[] direccionActual = Global.robot.get_direccion();
 
         // Definir las 4 direcciones posibles en orden horario
         int[][] direcciones = {
@@ -38,7 +38,7 @@ public class Rotacion extends ModuloDinamico {
         }
 
         // Cambiar la dirección del robot
-        Global.robot.setDireccion(direcciones[nuevoIndice]);
+        Global.robot.set_direccion(direcciones[nuevoIndice]);
 
         System.out.println("Robot giró " + grados + " grados. Nueva dirección: [" +
                 direcciones[nuevoIndice][0] + "," + direcciones[nuevoIndice][1] + "]");

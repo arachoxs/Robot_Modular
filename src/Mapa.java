@@ -37,8 +37,8 @@ public class Mapa {
         // Generar mascotas (1/30 de probabilidad)
 
         // Inicializar robot
-        set_celda(Global.robot.getPos()[1], Global.robot.getPos()[0], ROBOT);
-        posicion_robot = Global.robot.getPos();
+        set_celda(Global.robot.get_pos()[1], Global.robot.get_pos()[0], ROBOT);
+        posicion_robot = Global.robot.get_pos();
     }
 
     public void imprimir_mapa() {
@@ -64,7 +64,7 @@ public class Mapa {
     }
 
     public void actualizar_posicion_robot(){
-        int[] posicion_actual = Global.robot.getPos();
+        int[] posicion_actual = Global.robot.get_pos();
         if (es_valida(posicion_actual[1],posicion_actual[0])) {
             set_celda(posicion_robot[1], posicion_robot[0], AIRE);
             set_celda(posicion_actual[1], posicion_actual[0], ROBOT);

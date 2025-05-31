@@ -16,7 +16,7 @@ public class Altavoz extends Actuacion {
 
 
     //getters
-    public List<Actuador> getActuadores() { return actuadores; }
+    public List<Actuador> get_actuadores() { return actuadores; }
 
     @Override
     public int realizar_accion() {

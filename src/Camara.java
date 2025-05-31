@@ -15,7 +15,7 @@ public class Camara extends Percepcion{
     }
 
     // Getters
-    public List<Sensor> getSensores() { return sensores; }
+    public List<Sensor> get_sensores() { return sensores; }
 
     @Override
     public void interpretar_mensaje(String mensaje) {

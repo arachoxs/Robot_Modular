@@ -11,8 +11,8 @@ public class Actuador {
     }
 
     public int realizar_accion() {
-        int[] direccionActual = Global.robot.getDireccion();
-        int[] posicionActuaal = Global.robot.getPos();
+        int[] direccionActual = Global.robot.get_direccion();
+        int[] posicionActuaal = Global.robot.get_pos();
         //if(!Global.mapaGlobal.emitir_sonido(direccionActual[0],direccionActual[1])){
         //    return 0;
         //}

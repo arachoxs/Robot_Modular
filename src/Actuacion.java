@@ -7,8 +7,8 @@ public abstract class Actuacion extends ModuloEstatico {
     }
 
     // Getters y Setters
-    public int getN_actuadores() { return n_actuadores; }
-    public void setN_actuadores(int n_actuadores) { this.n_actuadores = n_actuadores; }
+    public int get_n_actuadores() { return n_actuadores; }
+    public void set_n_actuadores(int n_actuadores) { this.n_actuadores = n_actuadores; }
 
     public abstract int realizar_accion();
 

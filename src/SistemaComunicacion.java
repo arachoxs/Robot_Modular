@@ -5,7 +5,7 @@ public class SistemaComunicacion {
     public SistemaComunicacion(Modulo modulo, RedComunicacion red){
         this.modulo_propietario = modulo;
         this.red = red;
-        red.registrarSistema(modulo.get_id(),this);
+        red.registrar_sistema(modulo.get_id(),this);
     }
 
     // Getters y Setters
@@ -18,7 +18,7 @@ public class SistemaComunicacion {
     }
 
     public void enviar_mensaje(int receptor , String mensaje){
-        this.red.enviarMensaje(receptor,mensaje);
+        this.red.enviar_mensaje(receptor,mensaje);
     }
 
 }
