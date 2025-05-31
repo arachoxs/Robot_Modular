@@ -12,17 +12,20 @@ public class MatrizHandler {
                 matriz[i][j] = 0;
             }
         }
+
+        matriz[1][2]=1;
+        matriz[0][1]=1;
+
+
     }
 
     // Método para actualizar la matriz desde consola
     public void actualizarMatriz() {
-
-
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
                 int[] posicionActual = Global.robot.getPos();
                 if (i == posicionActual[1] && j == posicionActual[0]) {
-                    matriz[i][j] = 1;
+                    matriz[i][j] = 3;
                 }
 
                 System.out.print(matriz[i][j] + " ");

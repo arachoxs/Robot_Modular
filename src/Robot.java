@@ -21,8 +21,8 @@ public class Robot {
         this.direccion = new int[2];
 
         //Inicializar posicion y direccion
-        this.pos[0] = 0;//x
-        this.pos[1] = 0;//y
+        this.pos[0] = 1;//x
+        this.pos[1] = 1;//y
 
         this.direccion[0] = 1;//x
         this.direccion[1] = 0;//y
@@ -68,12 +68,6 @@ public class Robot {
         return pos.clone();
     }
 
-    public void setPos(int[] pos) {
-        if (pos != null && pos.length == 2) {
-            //this.pos[0] = pos[0];
-            //this.pos[1] = pos[1];
-        }
-    }
 
     public void setPos(int fila, int columna) {
         this.pos[0] = fila;
@@ -86,8 +80,8 @@ public class Robot {
 
     public void setDireccion(int[] direccion) {
         if (direccion != null && direccion.length == 2) {
-            //this.direccion[0] = direccion[0];
-            //.direccion[1] = direccion[1];
+            this.direccion[0] = direccion[0];
+            this.direccion[1] = direccion[1];
         }
     }
 

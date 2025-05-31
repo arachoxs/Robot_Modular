@@ -20,12 +20,13 @@ public class Sensor {
         int[] direccionActual = Global.robot.getDireccion();
         int[] posicionActual = Global.robot.getPos();
 
-        int filaObjetivo = posicionActual[0] + direccionActual[0];
-        int columnaObjetivo = posicionActual[1] + direccionActual[1];
+        int columnaObjetivo = posicionActual[0] + direccionActual[0];
+        int filaObjetivo = posicionActual[1] + direccionActual[1]*-1;
 
-
-
-        return Global.matriz.getCelda(filaObjetivo, columnaObjetivo);
+        System.out.println("posicion actual: " + posicionActual[0] + " " + posicionActual[1] + "");
+        System.out.println("Informacion captada en fila: " + filaObjetivo + " columna: " + columnaObjetivo + "");
+        System.out.println("Informacion captada: " + Global.mapa.get_celda(filaObjetivo, columnaObjetivo) + "");
+        return Global.mapa.get_celda(filaObjetivo, columnaObjetivo);
     }
 
     // Getters y Setters

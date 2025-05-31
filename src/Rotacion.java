@@ -13,10 +13,10 @@ public class Rotacion extends ModuloDinamico {
 
         // Definir las 4 direcciones posibles en orden horario
         int[][] direcciones = {
-                { 0, 1 }, // Derecha
-                { 1, 0 }, // Abajo
-                { 0, -1 }, // Izquierda
-                { -1, 0 } // Arriba
+                { 1, 0 }, // Derecha
+                { 0, -1 }, // Abajo
+                { -1, 0 }, // Izquierda
+                { 0, 1 } // Arriba
         };
 
         // Encontrar el índice de la dirección actual

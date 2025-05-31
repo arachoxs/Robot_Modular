@@ -11,8 +11,6 @@ public class SensorProximidad extends Percepcion{
     }
 
 
-
-
     public void agregar_sensor(Sensor sensor){
         this.sensores.add(sensor);
     }
@@ -28,7 +26,8 @@ public class SensorProximidad extends Percepcion{
         }else{
             if(instruccion.equals("VERIFICAR IZQUIERDA")){
                 this.get_sistema_control().enviar_respuesta_accion(4,"IZQUIERDA FALLIDO");
-            }else if(instruccion.equals("VERIFICAR DERECHA")){
+            }else if(instruccion.equals("VERIFICAR DERECHA")){ //logica de encerrado , helicoidal
+                //Mira izquierda -> hay obstaculo? Si -> Mira derecha -> hay obstaculo? Si -> Retrocede un paso
                 this.get_sistema_control().enviar_respuesta_accion(3,"ENCERRADO");
             }else{
                 this.get_sistema_control().enviar_respuesta_accion(4,"RECONOCER OBJETO");
@@ -55,6 +54,8 @@ public class SensorProximidad extends Percepcion{
             this.procesar_datos(captar_informacion(),"");
         }else if(mensaje.equals("VERIFICAR IZQUIERDA")){
             this.procesar_datos(captar_informacion(),"VERIFICAR IZQUIERDA");
+        }else if(mensaje.equals("VERIFICAR DERECHA")) {
+            this.procesar_datos(captar_informacion(), "VERIFICAR DERECHA");
         }
     }
 

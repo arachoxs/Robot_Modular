@@ -26,12 +26,14 @@ public class Helicoidal extends ModuloDinamico {
     }
 
     @Override
-    public void enviar_respuesta_accion(boolean respuesta,String mensaje,int receptor) {
+    public void enviar_respuesta_accion(boolean respuesta) {
 
     }
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje.equals(""))
+        if(mensaje.equals("ENCERRADO")){
+            System.out.println("ROBOT MK");
+        }
     }
 }

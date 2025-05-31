@@ -20,10 +20,10 @@ public class Camara extends Percepcion{
     @Override
     public void interpretar_mensaje(String mensaje) {
         if(mensaje.equals("RECONOCER OBJETO")){
-            this.captar_informacion();
+            this.procesar_datos(captar_informacion(),"RECONOCER OBJETO");
         }
-        else if(mensaje.equals("VERIFICAR IZQUIERDA")){
-            this.procesar_datos(captar_informacion(),"VERIFICAR IZQUIERDA");
+        else if(mensaje.equals("IZQUIERDA FALLIDO")){
+            this.procesar_datos(captar_informacion(),"IZQUIERDA FALLIDO");
         }
     }
 
@@ -34,12 +34,12 @@ public class Camara extends Percepcion{
         }
 
         if(datos==1){ //bloque
-            if(instruccion.equals("VERIFICAR IZQUIERDA")){
+            if(instruccion.equals("RECONOCER OBJETO")){
                 this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA");
-            }else if(instruccion.equals("IZQUIERDA FALLIDO")){
+            } else if(instruccion.equals("IZQUIERDA FALLIDO")){
+                System.out.println("hola");
                 this.get_sistema_control().enviar_respuesta_accion(2,"ROTACION IZQUIERDA FALLIDA");
             }
-            this.get_sistema_comunicacion().enviar_mensaje(1,"MOVER FIJO");
         }else{ //mascota
             if(instruccion.equals("VERIFICAR IZQUIERDA") && datos==1){
                 if(instruccion.equals("VERIFICAR IZQUIERDA")){

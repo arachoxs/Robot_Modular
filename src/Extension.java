@@ -27,17 +27,15 @@ public class Extension extends ModuloDinamico {
         int[] direccionActual = Global.robot.getDireccion();
         int[] posicionActual = Global.robot.getPos();
 
-        // Limpiar la celda actual
-        Global.matriz.setCelda(posicionActual[1], posicionActual[0], 0);
-
         // Calcular nueva posición
         int nuevoX = posicionActual[0] + direccionActual[0];
-        int nuevoY = posicionActual[1] + direccionActual[1];
+        int nuevoY = posicionActual[1] + direccionActual[1]*-1;
 
         // Mover el robot
         Global.robot.setPos(nuevoX, nuevoY);
 
-        Global.matriz.actualizarMatriz();
+        Global.mapa.actualizar_posicion_robot();
+        Global.mapa.imprimir_mapa();
 
         return true;
     }
