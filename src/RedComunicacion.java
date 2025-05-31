@@ -12,7 +12,7 @@ public class RedComunicacion {
         if (destino != null) {
             destino.recibir_mensaje(mensaje);
         } else {
-            if (Global.log == true) System.out.println("Destino [" + receptor + "] no encontrado.");
+            if (Global.log) System.out.println("Destino [" + receptor + "] no encontrado.");
         }
     }
 }

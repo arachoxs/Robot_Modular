@@ -18,13 +18,13 @@ public class Helicoidal extends ModuloDinamico {
     @Override
     public void encender() {
         this.set_encendido(true);
-        if (Global.log == true) System.out.println("Módulo Helicoidal encendido");
+        if (Global.log) System.out.println("Módulo Helicoidal encendido");
     }
 
     @Override
     public void apagar() {
         this.set_encendido(false);
-        if (Global.log == true) System.out.println("Módulo Helicoidal apagado");
+        if (Global.log) System.out.println("Módulo Helicoidal apagado");
     }
 
     @Override

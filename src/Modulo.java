@@ -71,7 +71,7 @@ public abstract class Modulo {
 
     public void recibir_info_accion(String info) {
         // Lógica para recibir información de acción
-        if (Global.log == true) System.out.println("Módulo " + id + " recibió info de acción: " + info);
+        if (Global.log) System.out.println("Módulo " + id + " recibió info de acción: " + info);
     }
 
     public abstract void enviar_respuesta_accion(boolean respuesta);

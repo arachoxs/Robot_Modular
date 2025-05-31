@@ -59,20 +59,21 @@ public class Main {
             System.out.println("Seleccione una opcion: ");
             opcion = scanner.nextInt();
             switch(opcion){
+                case 0: break;
                 case 1:{
                     System.out.print("Ingrese el número de pasos a mover: ");
                     int n_pasos = scanner.nextInt();
-                    if (Global.log == true) System.out.println("\n###############-LOG-##############");
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
                     Global.robot.get_modulo_id(Global.EXTENSION).get_sistema_comunicacion().recibir_mensaje("MOVER " + n_pasos);
-                    if (Global.log == true) System.out.println("##############-/LOG-##############\n");
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
                     break;
                 }
                 case 2:{
                     System.out.print("Ingrese el número de grados a girar (sentido horario): ");
                     int grados = scanner.nextInt();
-                    if (Global.log == true) System.out.println("\n###############-LOG-##############");
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
                     Global.robot.get_modulo_id(Global.ROTACION).get_sistema_comunicacion().recibir_mensaje("ROTAR " + grados);
-                    if (Global.log == true) System.out.println("##############-/LOG-##############\n");
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
                     break;
                 }
                 default:{

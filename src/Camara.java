@@ -67,13 +67,13 @@ public class Camara extends Percepcion{
     @Override
     public void encender() {
         this.set_encendido(true);
-        if (Global.log == true) System.out.println("Cámara encendida");
+        if (Global.log) System.out.println("Cámara encendida");
     }
 
     @Override
     public void apagar() {
         this.set_encendido(false);
-        if (Global.log == true) System.out.println("Cámara apagada");
+        if (Global.log) System.out.println("Cámara apagada");
     }
 
     @Override
