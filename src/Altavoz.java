@@ -7,6 +7,8 @@ public class Altavoz extends Actuacion {
     public Altavoz(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_actuadores){
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_actuadores);
         this.actuadores = new ArrayList<>();
+        Actuador actuador_principal = new Actuador(Global.ACTUADOR_PRINCIPAL, "Sonido", "Emite alerta");
+        this.agregar_actuador(actuador_principal);
     }
 
     public void agregar_actuador(Actuador actuador){
@@ -20,17 +22,18 @@ public class Altavoz extends Actuacion {
 
     @Override
     public int realizar_accion() {
-        int retorno=0;
+        int retorno = 0;
 
         for(Actuador actuador : actuadores){
-            retorno = actuador.realizar_accion();
+            if (actuador.get_id() == Global.ACTUADOR_PRINCIPAL)
+                retorno = actuador.realizar_accion();
         }
 
-        if(retorno==0){//accion fallida hubieron errores
+        if(retorno==0){//acción fallida, hubo errores
             return 0;
         }
         else{
-            if (Global.log) System.out.println("Accion completada con exito");
+            if (Global.log) System.out.println("Acción completada con éxito");
         }
 
         return 1; //accion completada con exito
@@ -55,7 +58,7 @@ public class Altavoz extends Actuacion {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje.equals("ESPANTAR")){
+        if(mensaje.equals("EMITIR SONIDO")){
             this.realizar_accion();
             this.get_sistema_control().enviar_respuesta_accion(1,"MOVER FIJO");
         }

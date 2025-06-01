@@ -16,6 +16,7 @@ public class Main {
             Global.mapa.set_celda(2, i, 1);
         }
         Global.mapa.set_celda(2, 6, 0);*/
+        Global.mapa.set_celda(5, 8, Mapa.MASCOTA);
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 

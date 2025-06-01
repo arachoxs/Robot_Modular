@@ -7,6 +7,8 @@ public class Camara extends Percepcion{
     public Camara(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores){
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
         this.sensores = new ArrayList<>();
+        Sensor sensor_principal = new Sensor(Global.SENSOR_PRINCIPAL, "Proximidad", "Sensor que detecta objetos");
+        this.agregar_sensor(sensor_principal); // composición dentro del módulo
     }
 
     public void agregar_sensor(Sensor sensor){
@@ -43,7 +45,6 @@ public class Camara extends Percepcion{
         if(datos==-1){
             return 0;
         }
-
         if(datos==1){ //bloque
             if(instruccion.equals("RECONOCER OBJETO")){
                 this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA");
@@ -57,7 +58,7 @@ public class Camara extends Percepcion{
                 this.get_sistema_control().enviar_respuesta_accion(Global.HELICOIDAL,"MOVIMIENTO HELICOIDAL FALLIDO");
             }
         }else{ //mascota
-            this.get_sistema_control().enviar_respuesta_accion(Global.ALTAVOZ,"ESPANTAR");
+            this.get_sistema_control().enviar_respuesta_accion(Global.ALTAVOZ,"EMITIR SONIDO");
         }
 
         return 1;
@@ -65,13 +66,12 @@ public class Camara extends Percepcion{
 
     @Override
     public int captar_informacion() {
-        int scan=-1;
-
-        for (Sensor sensor : sensores){
-            scan = sensor.captar_informacion();
+        for (Sensor sensor : sensores) {
+            if (sensor.get_id() == Global.SENSOR_PRINCIPAL) {
+                return sensor.captar_informacion();
+            }
         }
-
-        return scan;
+        return -1; // Retorna -1 si no se encuentra el sensor principal
     }
 
     @Override

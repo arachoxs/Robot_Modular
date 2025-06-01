@@ -15,6 +15,8 @@ public class Global {
     public static final int CAMARA = 4;
     public static final int SENSORPROXIMIDAD = 5;
     public static final int ALTAVOZ = 6;
+    public static final int SENSOR_PRINCIPAL = 7;
+    public static final int ACTUADOR_PRINCIPAL = 8;
 
     //pausa
     public static void pausa() {

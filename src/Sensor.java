@@ -13,16 +13,16 @@ public class Sensor {
     public int captar_informacion(){
         if (Global.mapa == null) return -1;
 
-        int[] direccionActual = Global.robot.get_direccion();
-        int[] posicionActual = Global.robot.get_pos();
+        int[] direccion_actual = Global.robot.get_direccion();
+        int[] posicion_actual = Global.robot.get_pos();
 
-        int columnaObjetivo = posicionActual[0] + direccionActual[0];
-        int filaObjetivo = posicionActual[1] + direccionActual[1]*-1;
+        int columna_objetivo = posicion_actual[0] + direccion_actual[0];
+        int fila_objetivo = posicion_actual[1] + direccion_actual[1]*-1;
 
-        //System.out.println("Posicion actual: " + posicionActual[0] + " " + posicionActual[1] + "");
-        if (Global.log) System.out.println("Información captada en fila " + filaObjetivo + ", columna " + columnaObjetivo + "");
+        //System.out.println("Posicion actual: " + posicion_actual[0] + " " + posicion_actual[1] + "");
+        if (Global.log) System.out.println("Información captada en fila " + fila_objetivo + ", columna " + columna_objetivo + "");
 
-        int informacion = Global.mapa.get_celda(filaObjetivo, columnaObjetivo);
+        int informacion = Global.mapa.get_celda(fila_objetivo, columna_objetivo);
 
         if (Global.log) System.out.println("Información captada: " + informacion + "");
         return informacion;

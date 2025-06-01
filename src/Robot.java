@@ -20,8 +20,8 @@ public class Robot {
         this.direccion = new int[2];
 
         //Inicializar posicion y direccion
-        this.pos[0] = pos[0];//x
-        this.pos[1] = pos[1];//y
+        this.pos[0] = pos[0];//fila
+        this.pos[1] = pos[1];//columna
 
         //Se inicializa mirando hacia el este
         this.direccion[0] = 1;//x
@@ -113,23 +113,17 @@ public class Robot {
     }
 
     public void agregar_sensor_proximidad(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores) {
-        SensorProximidad sensorProx = new SensorProximidad(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
-        Sensor sensor = new Sensor(123, "proximidad", "Sensor que detecta objetos");
-        sensorProx.agregar_sensor(sensor); // composición dentro del módulo
-        this.agregar_modulo(sensorProx);
+        SensorProximidad sensor_prox = new SensorProximidad(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
+        this.agregar_modulo(sensor_prox);
     }
 
     public void agregar_camara(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores) {
         Camara cam = new Camara(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
-        Sensor sensor = new Sensor(124, "visual", "Sensor que reconoce objetos");
-        cam.agregar_sensor(sensor);
         this.agregar_modulo(cam);
     }
 
     public void agregar_altavoz(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_actuadores) {
         Altavoz altavoz = new Altavoz(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_actuadores);
-        Actuador actuador = new Actuador(125, "sonido", "Emite alerta");
-        altavoz.agregar_actuador(actuador);
         this.agregar_modulo(altavoz);
     }
 

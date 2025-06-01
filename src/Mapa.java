@@ -2,11 +2,11 @@ import java.util.Random;
 
 public class Mapa {
     private int[][] matriz;
-    private static final int TAMAÑO = 10;
     private Random random;
     private int[] posicion_robot;
 
     // Constantes para los tipos de celdas
+    public static final int TAMAÑO = 12;
     public static final int AIRE = 0;
     public static final int OBSTACULO = 1;
     public static final int MASCOTA = 2;

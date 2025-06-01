@@ -8,6 +8,8 @@ public class SensorProximidad extends Percepcion{
     public SensorProximidad(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores){
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
         this.sensores = new ArrayList<>();
+        Sensor sensor_principal = new Sensor(Global.SENSOR_PRINCIPAL, "Proximidad", "Sensor que detecta objetos");
+        this.agregar_sensor(sensor_principal); // composición dentro del módulo
     }
 
     public void agregar_sensor(Sensor sensor){
@@ -19,8 +21,10 @@ public class SensorProximidad extends Percepcion{
             return 0;
         }
 
-        if(datos == 0){
-            this.get_sistema_comunicacion().enviar_mensaje(Global.EXTENSION,"MOVER FIJO");
+        if(datos == 0) {
+            this.get_sistema_comunicacion().enviar_mensaje(Global.EXTENSION, "MOVER FIJO");
+        }else if(datos == 2){
+            this.get_sistema_comunicacion().enviar_mensaje(Global.ALTAVOZ, "EMITIR SONIDO");
         }else{
             if(instruccion.equals("VERIFICAR IZQUIERDA")){
                 this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"IZQUIERDA FALLIDO");
@@ -38,13 +42,12 @@ public class SensorProximidad extends Percepcion{
 
     @Override
     public int captar_informacion() {
-        int scan = -1;
-
-        for (Sensor sensor : sensores){
-            scan = sensor.captar_informacion();
+        for (Sensor sensor : sensores) {
+            if (sensor.get_id() == Global.SENSOR_PRINCIPAL) {
+                return sensor.captar_informacion();
+            }
         }
-
-        return scan;
+        return -1; // Retorna -1 si no se encuentra el sensor principal
     }
 
     @Override
