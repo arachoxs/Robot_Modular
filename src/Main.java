@@ -11,11 +11,11 @@ public class Main {
     public static void main(String[] args) {
         //Configuración inicial del mapa
         //Global.mapa.set_celda(0, 4, 1);
-        Global.mapa.set_celda(1, 10, 1);
+        /*Global.mapa.set_celda(1, 10, 1);
         for (int i = 5; i < 10; i++){
             Global.mapa.set_celda(2, i, 1);
         }
-        Global.mapa.set_celda(2, 6, 0);
+        Global.mapa.set_celda(2, 6, 0);*/
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 
@@ -49,7 +49,7 @@ public class Main {
 
         int opcion = -1;
         while(opcion != 0) {
-            System.out.println("----------------------------------");
+            System.out.println("Menú principal\n----------------------------------");
             Global.mapa.imprimir_mapa();
             System.out.println("Posición actual del robot: " + Global.robot.get_pos()[0] + " " + Global.robot.get_pos()[1]);
             System.out.println("Dirección actual del robot: " + traducir_direccion(Global.robot.get_direccion()));
@@ -73,6 +73,33 @@ public class Main {
                     int grados = scanner.nextInt();
                     if (Global.log) System.out.println("\n###############-LOG-##############");
                     Global.robot.get_modulo_id(Global.ROTACION).get_sistema_comunicacion().recibir_mensaje("ROTAR " + grados);
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                case 3: {
+                    System.out.print("Ingrese el número de pasos a mover: ");
+                    int n_pasos = scanner.nextInt();
+                    int grados = 0;
+                    scanner.nextLine();
+                    while (true){
+                        System.out.printf("Ingrese el sentido en que va a girar el robot.\n1) Sentido horario\n2) Sentido antihorario\nSelecciones una opción: ");
+                        String sentido = scanner.nextLine();
+
+                        if (sentido.equalsIgnoreCase("1")){
+                            grados = 90;
+                            break;
+                        } else if (sentido.equalsIgnoreCase("2")){
+                            grados = -90;
+                            break;
+                        } else{
+                            System.out.println("Por favor ingrese un valor válido.");
+                        }
+                    }
+                    System.out.print("Ingrese el número de pasos antes del primer giro: ");
+                    int pasos_giro = scanner.nextInt();
+
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
+                    Global.robot.get_modulo_id(Global.HELICOIDAL).get_sistema_comunicacion().recibir_mensaje("HELICOIDAL " + n_pasos + "," + grados + "," + pasos_giro);
                     if (Global.log) System.out.println("##############-/LOG-##############\n");
                     break;
                 }

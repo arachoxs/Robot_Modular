@@ -26,6 +26,7 @@ public class Camara extends Percepcion{
             case "RECONOCER OBJETO":
             case "IZQUIERDA FALLIDO":
             case "DERECHA FALLIDO":
+            case "RECONOCER OBJETO HELICOIDAL":
                 resultado_accion = this.procesar_datos(captar_informacion(), instruccion_normalizada);
                 break;
             default:
@@ -38,7 +39,7 @@ public class Camara extends Percepcion{
     }
 
     @Override
-    public int procesar_datos(int datos,String instruccion) {
+    public int procesar_datos(int datos, String instruccion) {
         if(datos==-1){
             return 0;
         }
@@ -52,6 +53,8 @@ public class Camara extends Percepcion{
                 this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA FIJA");
                 this.get_sistema_control().enviar_respuesta_accion(Global.EXTENSION,"REVERSA");
                 this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA");
+            }else if(instruccion.equals("RECONOCER OBJETO HELICOIDAL")){
+                this.get_sistema_control().enviar_respuesta_accion(Global.HELICOIDAL,"MOVIMIENTO HELICOIDAL FALLIDO");
             }
         }else{ //mascota
             this.get_sistema_control().enviar_respuesta_accion(Global.ALTAVOZ,"ESPANTAR");

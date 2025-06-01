@@ -14,10 +14,9 @@ public class Extension extends ModuloDinamico {
             if (n_pasos == 1) System.out.println("Moviéndose en línea recta: " + n_pasos + " metro");
             else System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
         }
-        for(int i=0; i<n_pasos; i++){
+        for(int i = 0; i < n_pasos; i++){
             this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
         }
-
         return true;
     }
 
@@ -39,7 +38,7 @@ public class Extension extends ModuloDinamico {
 
         Global.mapa.actualizar_posicion_robot();
         if (Global.log) Global.mapa.imprimir_mapa();
-        Global.pausa();
+        if (Global.log) Global.pausa();
 
         return true;
     }
@@ -57,7 +56,7 @@ public class Extension extends ModuloDinamico {
 
         Global.mapa.actualizar_posicion_robot();
         if (Global.log) Global.mapa.imprimir_mapa();
-        Global.pausa();
+        if (Global.log) Global.pausa();
 
         return true;
     }

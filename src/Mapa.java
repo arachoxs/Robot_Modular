@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Mapa {
     private int[][] matriz;
-    private static final int TAMAÑO = 15;
+    private static final int TAMAÑO = 10;
     private Random random;
     private int[] posicion_robot;
 

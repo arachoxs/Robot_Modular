@@ -9,7 +9,7 @@ public class Robot {
     public int[] direccion;
     private boolean encendido;
 
-    public Robot(String Serie, String Alias, String Descripcion) {
+    public Robot(String Serie, String Alias, String Descripcion, int[] pos) {
         this.serie = Serie;
         this.alias = Alias;
         this.descripcion = Descripcion;
@@ -20,8 +20,8 @@ public class Robot {
         this.direccion = new int[2];
 
         //Inicializar posicion y direccion
-        this.pos[0] = 1;//x
-        this.pos[1] = 1;//y
+        this.pos[0] = pos[0];//x
+        this.pos[1] = pos[1];//y
 
         //Se inicializa mirando hacia el este
         this.direccion[0] = 1;//x

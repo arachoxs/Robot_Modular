@@ -26,8 +26,10 @@ public class SensorProximidad extends Percepcion{
                 this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"IZQUIERDA FALLIDO");
             }else if(instruccion.equals("VERIFICAR DERECHA")){
                 this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"DERECHA FALLIDO");
-            }else{
+            }else if(instruccion.equals("VERIFICAR")){
                 this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"RECONOCER OBJETO");
+            }else if(instruccion.equals("VERIFICAR HELICOIDAL")){
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"RECONOCER OBJETO HELICOIDAL");
             }
         }
 
@@ -54,6 +56,7 @@ public class SensorProximidad extends Percepcion{
             case "VERIFICAR":
             case "VERIFICAR IZQUIERDA":
             case "VERIFICAR DERECHA":
+            case "VERIFICAR HELICOIDAL":
                 resultado_accion = this.procesar_datos(captar_informacion(), instruccion_normalizada);
                 break;
             default:

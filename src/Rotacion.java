@@ -96,8 +96,6 @@ public class Rotacion extends ModuloDinamico {
         return Integer.parseInt(numeroStr);
     }
 
-
-
     @Override
     public void encender() {
         this.set_encendido(true);
