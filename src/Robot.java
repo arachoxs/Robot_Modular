@@ -20,8 +20,8 @@ public class Robot {
         this.direccion = new int[2];
 
         //Inicializar posicion y direccion
-        this.pos[0] = 5;//x
-        this.pos[1] = 5;//y
+        this.pos[0] = 1;//x
+        this.pos[1] = 1;//y
 
         //Se inicializa mirando hacia el este
         this.direccion[0] = 1;//x

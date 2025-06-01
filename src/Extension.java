@@ -36,6 +36,7 @@ public class Extension extends ModuloDinamico {
 
         Global.mapa.actualizar_posicion_robot();
         Global.mapa.imprimir_mapa();
+        Global.pausa();
 
         return true;
     }
@@ -107,7 +108,7 @@ public class Extension extends ModuloDinamico {
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-        if(!respuesta){
+        if(respuesta){
             System.out.println("Movimiento del robot ejecutado sin problemas.");
         }
         else{

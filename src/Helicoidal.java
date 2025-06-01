@@ -29,7 +29,13 @@ public class Helicoidal extends ModuloDinamico {
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-
+        if(respuesta){
+            System.out.println("Movimiento Helicoidal del robot ejecutada sin problemas.");
+        }
+        else{
+            System.out.println("Error en movimiento helicoidal detectada, ejecutando gestion de errores.");
+            this.gestionar_solucion();
+        }
     }
 
     @Override

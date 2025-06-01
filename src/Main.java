@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.Scanner;
 
 public class Main {
@@ -28,6 +27,7 @@ public class Main {
             System.out.print("Ingrese el número de pasos a mover: ");
             int n_pasos = scanner.nextInt();
             Global.robot.get_modulo_id(Global.EXTENSION).get_sistema_comunicacion().recibir_mensaje("MOVER "+n_pasos);
+            //implementacion de menu
         }
 
 

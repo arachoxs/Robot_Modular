@@ -52,33 +52,43 @@ public class Rotacion extends ModuloDinamico {
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje.equals("ROTACION IZQUIERDA")){
-            moverse(-90);
-            this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR IZQUIERDA");
-        }else if(mensaje.equals("ROTACION IZQUIERDA FIJA")){
-            moverse(-90);
-        }
-        else if(mensaje.equals("ROTACION IZQUIERDA FALLIDA")){
-            moverse(180);
-            this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR DERECHA");
-        }else{
-            try {
-                mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
+        mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
+        boolean resultadoAccion = false;
 
-                if (mensaje.startsWith("ROTAR")) {
-                    int grados = extraer_grados(mensaje);
-                    moverse(grados);
-                }
-                else {
-                    System.out.println("Mensaje no reconocido: " + mensaje);
-                }
 
-            } catch (NumberFormatException e) {
-                System.out.println("Error: número de grados inválido.");
-            } catch (Exception e) {
-                System.out.println("Error general al interpretar mensaje: " + e.getMessage());
-            }
+        switch (mensaje) {
+            case "ROTACION IZQUIERDA":
+                resultadoAccion = moverse(-90);
+                this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD, "VERIFICAR IZQUIERDA");
+                break;
+
+            case "ROTACION IZQUIERDA FIJA":
+                resultadoAccion = moverse(-90);
+                break;
+
+            case "ROTACION IZQUIERDA FALLIDA":
+                resultadoAccion = moverse(180);
+                this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD, "VERIFICAR DERECHA");
+                break;
+
+            default:
+                try {
+                    if (mensaje.startsWith("ROTAR")) {
+                        int grados = extraer_grados(mensaje);
+                        resultadoAccion = moverse(grados);
+                    } else {
+                        System.out.println("Mensaje no reconocido: " + mensaje);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Error: número de grados inválido.");
+                } catch (Exception e) {
+                    System.out.println("Error general al interpretar mensaje: " + e.getMessage());
+                }
+                break;
         }
+
+        this.enviar_respuesta_accion(resultadoAccion);
+
     }
 
     private int extraer_grados(String mensaje) throws NumberFormatException {
@@ -102,7 +112,13 @@ public class Rotacion extends ModuloDinamico {
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-
+        if(respuesta){
+            System.out.println("Rotacion del robot ejecutada sin problemas.");
+        }
+        else{
+            System.out.println("Error en rotacion detectada, ejecutando gestion de errores.");
+            this.gestionar_solucion();
+        }
     }
 
 }

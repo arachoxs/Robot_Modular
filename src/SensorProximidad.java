@@ -10,11 +10,9 @@ public class SensorProximidad extends Percepcion{
         this.sensores = new ArrayList<>();
     }
 
-
     public void agregar_sensor(Sensor sensor){
         this.sensores.add(sensor);
     }
-
 
     public int procesar_datos(int datos, String instruccion) {
         if(datos == -1){
@@ -49,13 +47,21 @@ public class SensorProximidad extends Percepcion{
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        if(mensaje.equals("VERIFICAR")){
-            this.procesar_datos(captar_informacion(),"");
-        }else if(mensaje.equals("VERIFICAR IZQUIERDA")){
-            this.procesar_datos(captar_informacion(),"VERIFICAR IZQUIERDA");
-        }else if(mensaje.equals("VERIFICAR DERECHA")) {
-            this.procesar_datos(captar_informacion(), "VERIFICAR DERECHA");
+        int resultadoAccion = 0;
+        String instruccionNormalizada = mensaje.trim().toUpperCase();
+
+        switch (instruccionNormalizada) {
+            case "VERIFICAR":
+            case "VERIFICAR IZQUIERDA":
+            case "VERIFICAR DERECHA":
+                resultadoAccion = this.procesar_datos(captar_informacion(), instruccionNormalizada);
+                break;
+            default:
+                System.out.println("Instrucción no reconocida: " + mensaje);
+                break;
         }
+
+        this.enviar_respuesta_accion(resultadoAccion == 1);
     }
 
     @Override
@@ -72,6 +78,12 @@ public class SensorProximidad extends Percepcion{
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-
+        if(respuesta){
+            System.out.println("Medicion de proximidad ejecutada sin problemas.");
+        }
+        else{
+            System.out.println("Error en medicion de proximidad detectada, ejecutando gestion de errores.");
+            this.gestionar_solucion();
+        }
     }
 }
