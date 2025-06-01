@@ -77,7 +77,7 @@ public abstract class Modulo {
     public abstract void enviar_respuesta_accion(boolean respuesta);
 
     public void gestionar_solucion() {
-        System.out.println("Buscando la solucion mas eficiente para el problema");
+        if (Global.log) System.out.println("Buscando la solucion mas eficiente para el problema");
     }
 
     public abstract void interpretar_mensaje(String mensaje); //interpreta lo que el sistema de comunicacion recibe

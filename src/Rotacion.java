@@ -53,21 +53,21 @@ public class Rotacion extends ModuloDinamico {
     @Override
     public void interpretar_mensaje(String mensaje) {
         mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
-        boolean resultadoAccion = false;
+        boolean resultado_accion = false;
 
 
         switch (mensaje) {
             case "ROTACION IZQUIERDA":
-                resultadoAccion = moverse(-90);
+                resultado_accion = moverse(-90);
                 this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD, "VERIFICAR IZQUIERDA");
                 break;
 
             case "ROTACION IZQUIERDA FIJA":
-                resultadoAccion = moverse(-90);
+                resultado_accion = moverse(-90);
                 break;
 
             case "ROTACION IZQUIERDA FALLIDA":
-                resultadoAccion = moverse(180);
+                resultado_accion = moverse(180);
                 this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD, "VERIFICAR DERECHA");
                 break;
 
@@ -75,7 +75,7 @@ public class Rotacion extends ModuloDinamico {
                 try {
                     if (mensaje.startsWith("ROTAR")) {
                         int grados = extraer_grados(mensaje);
-                        resultadoAccion = moverse(grados);
+                        resultado_accion = moverse(grados);
                     } else {
                         System.out.println("Mensaje no reconocido: " + mensaje);
                     }
@@ -87,7 +87,7 @@ public class Rotacion extends ModuloDinamico {
                 break;
         }
 
-        this.enviar_respuesta_accion(resultadoAccion);
+        this.enviar_respuesta_accion(resultado_accion);
 
     }
 
@@ -113,10 +113,10 @@ public class Rotacion extends ModuloDinamico {
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
         if(respuesta){
-            System.out.println("Rotacion del robot ejecutada sin problemas.");
+            if (Global.log) System.out.println("Rotacion del robot ejecutada sin problemas.");
         }
         else{
-            System.out.println("Error en rotacion detectada, ejecutando gestion de errores.");
+            if (Global.log) System.out.println("Error en rotacion detectada, ejecutando gestion de errores.");
             this.gestionar_solucion();
         }
     }

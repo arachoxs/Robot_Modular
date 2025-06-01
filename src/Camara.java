@@ -19,21 +19,21 @@ public class Camara extends Percepcion{
 
     @Override
     public void interpretar_mensaje(String mensaje) {
-        int resultadoAccion = 0;
-        String instruccionNormalizada = mensaje.trim().toUpperCase();
+        int resultado_accion = 0;
+        String instruccion_normalizada = mensaje.trim().toUpperCase();
 
-        switch (instruccionNormalizada) {
+        switch (instruccion_normalizada) {
             case "RECONOCER OBJETO":
             case "IZQUIERDA FALLIDO":
             case "DERECHA FALLIDO":
-                resultadoAccion = this.procesar_datos(captar_informacion(), instruccionNormalizada);
+                resultado_accion = this.procesar_datos(captar_informacion(), instruccion_normalizada);
                 break;
             default:
                 System.out.println("Mensaje no reconocido: " + mensaje);
                 break;
         }
 
-        this.enviar_respuesta_accion(resultadoAccion == 1);
+        this.enviar_respuesta_accion(resultado_accion == 1);
 
     }
 
