@@ -17,6 +17,18 @@ public class Main {
         }
         Global.mapa.set_celda(2, 6, 0);*/
         Global.mapa.set_celda(5, 8, Mapa.MASCOTA);
+        Global.mapa.set_celda(6, 8, Mapa.OBSTACULO);
+        Global.mapa.set_celda(7, 8, Mapa.OBSTACULO);
+        Global.mapa.set_celda(6, 7, Mapa.OBSTACULO);
+        Global.mapa.set_celda(7, 7, Mapa.OBSTACULO);
+        Global.mapa.set_celda(4, 8, Mapa.OBSTACULO);
+        Global.mapa.set_celda(3, 8, Mapa.OBSTACULO);
+        Global.mapa.set_celda(4, 7, Mapa.OBSTACULO);
+        Global.mapa.set_celda(3, 7, Mapa.OBSTACULO);
+        Global.mapa.set_celda(7, 6, Mapa.OBSTACULO);
+        Global.mapa.set_celda(6, 6, Mapa.OBSTACULO);
+        Global.mapa.set_celda(3, 6, Mapa.OBSTACULO);
+        Global.mapa.set_celda(4, 6, Mapa.OBSTACULO);
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 

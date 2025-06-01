@@ -59,8 +59,11 @@ public class Altavoz extends Actuacion {
     @Override
     public void interpretar_mensaje(String mensaje) {
         if(mensaje.equals("EMITIR SONIDO")){
-            this.realizar_accion();
-            this.get_sistema_control().enviar_respuesta_accion(1,"MOVER FIJO");
+            if (this.realizar_accion() == 1)
+                this.get_sistema_control().enviar_respuesta_accion(Global.EXTENSION,"MOVER FIJO");
+            else if (realizar_accion() == 0) {
+                this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA");
+            }
         }
     }
 }

@@ -44,20 +44,9 @@ public class Extension extends ModuloDinamico {
     }
 
     public boolean mover_reversa(){
-        int[] direccionActual = Global.robot.get_direccion();
-        int[] posicionActual = Global.robot.get_pos();
-
-        // Calcular nueva posición
-        int nuevoX = posicionActual[0] - direccionActual[0];
-        int nuevoY = posicionActual[1] - direccionActual[1]*-1;
-
-        // Mover el robot
-        Global.robot.set_pos(nuevoX, nuevoY);
-
-        Global.mapa.actualizar_posicion_robot();
-        if (Global.log) Global.mapa.imprimir_mapa();
-        if (Global.log) Global.pausa();
-
+        Global.robot.get_modulo_id(Global.ROTACION).get_sistema_comunicacion().recibir_mensaje("ROTAR 180");
+        Global.robot.get_modulo_id(Global.EXTENSION).get_sistema_comunicacion().recibir_mensaje("MOVER 1");
+        Global.robot.get_modulo_id(Global.ROTACION).get_sistema_comunicacion().recibir_mensaje("ROTAR 180");
         return true;
     }
 
