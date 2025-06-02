@@ -153,7 +153,7 @@ public class Main {
         for (int i = 5; i < 10; i++){
             Global.mapa.set_celda(2, i, 1);
         }
-        Global.mapa.set_celda(2, 6, 0);*/
+        Global.mapa.set_celda(2, 6, 0);
         Global.mapa.set_celda(5, 8, Mapa.MASCOTA);
         Global.mapa.set_celda(6, 8, Mapa.OBSTACULO);
         Global.mapa.set_celda(7, 8, Mapa.OBSTACULO);
@@ -174,6 +174,8 @@ public class Main {
         Global.mapa.set_celda(5, 6, Mapa.MASCOTA);
         Global.mapa.set_celda(6, 4, Mapa.MASCOTA);
         Global.mapa.set_celda(6, 5, Mapa.MASCOTA);
+
+        */
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 

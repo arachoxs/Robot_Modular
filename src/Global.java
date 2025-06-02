@@ -1,7 +1,7 @@
 public class Global {
     public static RedComunicacion red = new RedComunicacion();
-    public static int[] pos = {5, 5};
-    public static Robot robot = new Robot("123", "Phi", "Robotcini Banini", pos);
+    public static int[] posicion_inicial = {1, 1};
+    public static Robot robot = new Robot("123", "Phi", "Robotcini Banini", posicion_inicial);
     public static Mapa mapa = new Mapa();// Referencia al mapa global
     public static boolean log = false;
     public static boolean inicializado = false;
