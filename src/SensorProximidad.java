@@ -28,8 +28,6 @@ public class SensorProximidad extends Percepcion{
 
         if(datos == 0) {
             this.get_sistema_comunicacion().enviar_mensaje(Global.EXTENSION, "MOVER FIJO");
-        }else if(datos == 2){
-            this.get_sistema_comunicacion().enviar_mensaje(Global.ALTAVOZ_PRINCIPAL, "EMITIR SONIDO");
         }else{
             if(instruccion.equals("VERIFICAR IZQUIERDA")){
                 this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA_PRINCIPAL,"IZQUIERDA FALLIDO");
