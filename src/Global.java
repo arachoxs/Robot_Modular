@@ -36,14 +36,4 @@ public class Global {
         new java.util.Scanner(System.in).nextLine();
     }
 
-    public static String get_animal() {
-        List<String> animales = Arrays.asList(
-                "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯",
-                "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🐧", "🐦", "🐤", "🦆"
-        );
-
-        Random rand = new Random();
-        int index = rand.nextInt(animales.size());
-        return animales.get(index);
-    }
 }
