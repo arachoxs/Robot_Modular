@@ -43,9 +43,20 @@ public class Mapa {
 
     public void imprimir_mapa() {
         for (int i = 0; i < TAMAÑO; i++) {
+            System.out.print("\t\t\t");
+
             for (int j = 0; j < TAMAÑO; j++) {
-                System.out.print(matriz[i][j] + " ");
+                if(matriz[i][j]==ROBOT){
+                    System.out.print(Global.ANSI_RED + matriz[i][j] + Global.ANSI_RESET + " ");
+                }else if(matriz[i][j]==MASCOTA){
+                    System.out.print(Global.ANSI_YELLOW + matriz[i][j] + Global.ANSI_RESET + " ");
+                }else if(matriz[i][j]==OBSTACULO){
+                    System.out.print(Global.ANSI_BLUE + matriz[i][j] + Global.ANSI_RESET + " ");
+                }else{
+                    System.out.print(Global.ANSI_BLACK + matriz[i][j] + Global.ANSI_RESET + " ");
+                }
             }
+
             System.out.println();
         }
     }
