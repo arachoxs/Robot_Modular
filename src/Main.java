@@ -148,11 +148,11 @@ public class Main {
 
     public static void main(String[] args) {
         //Configuración inicial del mapa
-        /*Global.mapa.set_celda(1, 10, 1);
-        for (int i = 5; i < 10; i++){
+        Global.mapa.set_celda(1, 10, 1);
+        /*for (int i = 5; i < 10; i++){
             Global.mapa.set_celda(2, i, 1);
-        }
-        Global.mapa.set_celda(2, 6, 0);
+        }*/
+
         Global.mapa.set_celda(5, 8, Mapa.MASCOTA);
         Global.mapa.set_celda(6, 8, Mapa.OBSTACULO);
         Global.mapa.set_celda(7, 8, Mapa.OBSTACULO);
@@ -174,7 +174,7 @@ public class Main {
         Global.mapa.set_celda(6, 4, Mapa.MASCOTA);
         Global.mapa.set_celda(6, 5, Mapa.MASCOTA);
 
-        */
+
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 
@@ -206,21 +206,21 @@ public class Main {
 
         int opcion = -1;
         while(opcion != 0) {
-            System.out.println("╔════════════════════════════════════════════════════════════╗");
-            System.out.println("║                      Menú principal                        ║");
-            System.out.println("╚════════════════════════════════════════════════════════════╝");
+            System.out.println("\t\t╔════════════════════════════════════════════════════════════╗");
+            System.out.println("\t\t║                      Menú principal                        ║");
+            System.out.println("\t\t╚════════════════════════════════════════════════════════════╝");
             Global.mapa.imprimir_mapa();
-            System.out.println("Posición actual del robot: " + Global.robot.get_pos()[0] + " " + Global.robot.get_pos()[1]);
+            System.out.print("\t\tPosición actual del robot: " + Global.robot.get_pos()[0] + " " + Global.robot.get_pos()[1] +"\t|\t");
             System.out.println("Dirección actual del robot: " + traducir_direccion(Global.robot.get_direccion()));
-            System.out.println("╔════════════════════════════════════════════════════════════╗");
-            System.out.println("║ 1) Extensión              6) Altavoz                       ║");
-            System.out.println("║ 2) Rotación               7) Encender robot                ║");
-            System.out.println("║ 3) Helicoidal             8) Apagar robot                  ║");
-            System.out.println("║ 4) Cámara                 9) Agregar módulo estático       ║");
-            System.out.println("║ 5) Sensor proximidad     10) Lista de módulos estáticos    ║");
-            System.out.println("║ 0) Salir                                                   ║");
-            System.out.println("╚════════════════════════════════════════════════════════════╝");
-            System.out.print("Seleccione una opción: ");
+            System.out.println("\t\t╔════════════════════════════════════════════════════════════╗");
+            System.out.println("\t\t║ 1) Extensión              6) Altavoz                       ║");
+            System.out.println("\t\t║ 2) Rotación               7) Encender robot                ║");
+            System.out.println("\t\t║ 3) Helicoidal             8) Apagar robot                  ║");
+            System.out.println("\t\t║ 4) Cámara                 9) Agregar módulo estático       ║");
+            System.out.println("\t\t║ 5) Sensor proximidad     10) Lista de módulos estáticos    ║");
+            System.out.println("\t\t║ 0) Salir                                                   ║");
+            System.out.println("\t\t╚════════════════════════════════════════════════════════════╝");
+            System.out.print("\t\tSeleccione una opción: ");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 0:
