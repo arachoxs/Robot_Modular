@@ -8,12 +8,17 @@ public class SensorProximidad extends Percepcion{
     public SensorProximidad(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores){
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
         this.sensores = new ArrayList<>();
-        Sensor sensor_principal = new Sensor(Global.SENSOR_PRINCIPAL, "Proximidad", "Sensor que detecta objetos");
-        this.agregar_sensor(sensor_principal); // composición dentro del módulo
+    }
+
+    // Getters y Setters
+    public List<Sensor> get_sensores() {
+        return sensores;
     }
 
     public void agregar_sensor(Sensor sensor){
         this.sensores.add(sensor);
+        //aumentar numero sensores
+        this.set_n_sensores(this.get_n_sensores() + 1);
     }
 
     public int procesar_datos(int datos, String instruccion) {
@@ -24,16 +29,16 @@ public class SensorProximidad extends Percepcion{
         if(datos == 0) {
             this.get_sistema_comunicacion().enviar_mensaje(Global.EXTENSION, "MOVER FIJO");
         }else if(datos == 2){
-            this.get_sistema_comunicacion().enviar_mensaje(Global.ALTAVOZ, "EMITIR SONIDO");
+            this.get_sistema_comunicacion().enviar_mensaje(Global.ALTAVOZ_PRINCIPAL, "EMITIR SONIDO");
         }else{
             if(instruccion.equals("VERIFICAR IZQUIERDA")){
-                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"IZQUIERDA FALLIDO");
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA_PRINCIPAL,"IZQUIERDA FALLIDO");
             }else if(instruccion.equals("VERIFICAR DERECHA")){
-                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"DERECHA FALLIDO");
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA_PRINCIPAL,"DERECHA FALLIDO");
             }else if(instruccion.equals("VERIFICAR")){
-                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"RECONOCER OBJETO");
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA_PRINCIPAL,"RECONOCER OBJETO");
             }else if(instruccion.equals("VERIFICAR HELICOIDAL")){
-                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA,"RECONOCER OBJETO HELICOIDAL");
+                this.get_sistema_control().enviar_respuesta_accion(Global.CAMARA_PRINCIPAL,"RECONOCER OBJETO HELICOIDAL");
             }
         }
 
@@ -56,6 +61,18 @@ public class SensorProximidad extends Percepcion{
         String instruccion_normalizada = mensaje.trim().toUpperCase();
 
         switch (instruccion_normalizada) {
+            case "OBSERVAR":{
+                int objeto = this.captar_informacion();
+                if (objeto != 0) {
+                    System.out.println("Se detectó un objeto en frente.");
+                    resultado_accion = 1;
+                }
+                else {
+                    System.out.println("No se detectó ningún objeto en frente.");
+                    resultado_accion = 1;
+                }
+                break;
+            }
             case "VERIFICAR":
             case "VERIFICAR IZQUIERDA":
             case "VERIFICAR DERECHA":

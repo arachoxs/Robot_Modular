@@ -114,16 +114,28 @@ public class Robot {
 
     public void agregar_sensor_proximidad(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores) {
         SensorProximidad sensor_prox = new SensorProximidad(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
+        if (!Global.inicializado){
+            Sensor sensor = new Sensor(Global.SENSOR_PRINCIPAL, "Sensor de propósito general", "Detecta obstáculos cercanos y captura imágenes");
+            sensor_prox.agregar_sensor(sensor);
+        }
         this.agregar_modulo(sensor_prox);
     }
 
     public void agregar_camara(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores) {
         Camara cam = new Camara(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
+        if (!Global.inicializado){
+            Sensor sensor = new Sensor(Global.SENSOR_PRINCIPAL, "Sensor de propósito general", "Detecta obstáculos cercanos y captura imágenes");
+            cam.agregar_sensor(sensor);
+        }
         this.agregar_modulo(cam);
     }
 
     public void agregar_altavoz(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_actuadores) {
         Altavoz altavoz = new Altavoz(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_actuadores);
+        if (!Global.inicializado){
+            Actuador actuador = new Actuador(Global.ACTUADOR_PRINCIPAL, "Sonido", "Emite alerta");
+            altavoz.agregar_actuador(actuador);
+        }
         this.agregar_modulo(altavoz);
     }
 
@@ -136,7 +148,49 @@ public class Robot {
         return null; // Si no se encuentra
     }
 
+    public boolean existe_modulo_id(int id) {
+        for (Modulo modulo : modulos) {
+            if (modulo.get_id() == id) {
+                return true;
+            }
+        }
+        return false; // Si no se encuentra
+    }
 
+    public boolean existe_sensor(int id){
+        for (Modulo modulo : modulos) {
+            if (modulo instanceof SensorProximidad) {
+                SensorProximidad sensorProx = (SensorProximidad) modulo;
+                for (Sensor sensor : sensorProx.get_sensores()) {
+                    if (sensor.get_id() == id) {
+                        return true;
+                    }
+                }
+            } else if (modulo instanceof Camara) {
+                Camara camara = (Camara) modulo;
+                for (Sensor sensor : camara.get_sensores()) {
+                    if (sensor.get_id() == id) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; // Si no se encuentra
+    }
+
+    public boolean existe_actuador(int id){
+        for (Modulo modulo : modulos) {
+            if (modulo instanceof Altavoz) {
+                Altavoz altavoz = (Altavoz) modulo;
+                for (Actuador actuador : altavoz.get_actuadores()) {
+                    if (actuador.get_id() == id) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; // Si no se encuentra
+    }
 
     public void encender(){
         this.encendido = true;

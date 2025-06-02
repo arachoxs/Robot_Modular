@@ -7,13 +7,12 @@ public class Altavoz extends Actuacion {
     public Altavoz(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_actuadores){
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_actuadores);
         this.actuadores = new ArrayList<>();
-        Actuador actuador_principal = new Actuador(Global.ACTUADOR_PRINCIPAL, "Sonido", "Emite alerta");
-        this.agregar_actuador(actuador_principal);
     }
 
     public void agregar_actuador(Actuador actuador){
         this.actuadores.add(actuador);
         //aumentar numero actuadores
+        this.set_n_actuadores(this.get_n_actuadores() + 1);
     }
 
 
@@ -64,6 +63,8 @@ public class Altavoz extends Actuacion {
             else if (realizar_accion() == 0) {
                 this.get_sistema_control().enviar_respuesta_accion(Global.ROTACION,"ROTACION IZQUIERDA");
             }
+        }else if (mensaje.equals("EMITIR")){
+            this.realizar_accion();
         }
     }
 }

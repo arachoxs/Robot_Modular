@@ -15,7 +15,7 @@ public class Extension extends ModuloDinamico {
             else System.out.println("Moviéndose en línea recta: " + n_pasos + " metros");
         }
         for(int i = 0; i < n_pasos; i++){
-            this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
+            this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL,"VERIFICAR"); //manda mensaje para que verifique alfrente a proximidad
         }
         return true;
     }

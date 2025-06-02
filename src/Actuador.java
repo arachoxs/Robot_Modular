@@ -1,3 +1,7 @@
+import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
+
 public class Actuador {
     private int id;
     private String tipo;
@@ -8,29 +12,57 @@ public class Actuador {
         this.tipo = tipo;
         this.descripcion = descripcion;
     }
-
     public int realizar_accion() {
-        int[] direccion_robot = Global.robot.get_direccion();
-        int[] posicion_robot = Global.robot.get_pos();
+        if (Global.mapa == null) return -1;
 
-        // Posición Actual de la mascota
-        int columna_actual_mascota = posicion_robot[0] + direccion_robot[0];
-        int fila_actual_mascota = posicion_robot[1] + direccion_robot[1] * -1;
+        int[] posicion_actual = Global.robot.get_pos();
+        List<int[]> posiciones = new ArrayList<>();
+        int[][] direcciones = {
+                { -1, -1 }, { -1, 0 }, { -1, 1 },
+                {  0, -1 },           {  0, 1 },
+                {  1, -1 }, {  1, 0 }, {  1, 1 }
+        };
 
-        // Encontrar nueva posición aleatoria para la mascota
-        int[] nueva_posicion = encontrar_posicion_aleatoria_vecindario(fila_actual_mascota, columna_actual_mascota);
-
-        if (nueva_posicion != null) {
-            // Limpiar posición actual de la mascota
-            Global.mapa.set_celda(fila_actual_mascota, columna_actual_mascota, Mapa.AIRE);
-            // Colocar mascota en nueva posición
-            Global.mapa.set_celda(nueva_posicion[0], nueva_posicion[1], Mapa.MASCOTA);
-            if (Global.log) System.out.println("Mascota movida a: [" + nueva_posicion[0] + "," + nueva_posicion[1] + "]");
-            return 1; // Código de éxito
-        } else {
-            if (Global.log) System.out.println("La mascota no encontró a dónde huir");
-            return 0; // Código de fallo
+        for (int[] dir : direcciones) {
+            int nuevaFila = posicion_actual[1] + dir[1];
+            int nuevaCol = posicion_actual[0] + dir[0];
+            if (Global.mapa.es_valida(nuevaFila, nuevaCol)) {
+                posiciones.add(new int[] { nuevaFila, nuevaCol });
+            }
         }
+
+        boolean mascota_encontrada = false;
+
+        for (int[] pos : posiciones) {
+            int fila = pos[0];
+            int columna = pos[1];
+            int valor = Global.mapa.get_celda(fila, columna);
+
+            if (Global.log)
+                System.out.println("Revisando posición [" + fila + ", " + columna + "], valor: " + valor);
+
+            if (valor != Mapa.MASCOTA) continue;
+
+            mascota_encontrada = true;
+
+            if (Global.log)
+                System.out.println("Mascota encontrada en la posición: " + fila + ", " + columna);
+
+            int[] nueva_pos = encontrar_posicion_aleatoria_vecindario(fila, columna);
+            if (nueva_pos != null) {
+                Global.mapa.set_celda(fila, columna, Mapa.AIRE);
+                Global.mapa.set_celda(nueva_pos[0], nueva_pos[1], Mapa.MASCOTA);
+                if (Global.log)
+                    System.out.println("Mascota movida a: [" + nueva_pos[0] + ", " + nueva_pos[1] + "]");
+            } else {
+                if (Global.log)
+                    System.out.println("No hay lugar para mover la mascota desde: [" + fila + ", " + columna + "]");
+            }
+        }
+        if (!mascota_encontrada && Global.log)
+            System.out.println("No se encontró ninguna mascota en las posiciones adyacentes.");
+
+        return mascota_encontrada ? 1 : 0;
     }
 
     private int[] encontrar_posicion_aleatoria_vecindario(int filaActual, int columnaActual) {
@@ -41,6 +73,10 @@ public class Actuador {
                 {  0, -2 }, {  0, -1 }, {  0, 0 }, {  0, 1 }, {  0, 2 }, // Fila 0
                 {  1, -2 }, {  1, -1 }, {  1, 0 }, {  1, 1 }, {  1, 2 }, // Fila 1
                 {  2, -2 }, {  2, -1 }, {  2, 0 }, {  2, 1 }, {  2, 2 }  // Fila 2
+
+                /*{ -1, -1 }, { -1, 0 }, { -1, 1 }, // Fila -1
+                {  0, -1 }, {  0, 0 }, {  0, 1 }, // Fila 0
+                {  1, -1 }, {  1, 0 }, {  1, 1 }   // Fila +1*/
         };
 
         // Crear lista de posiciones válidas (vacías)

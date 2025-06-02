@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Helicoidal extends ModuloDinamico {
 
     //Constructor
@@ -21,7 +19,7 @@ public class Helicoidal extends ModuloDinamico {
         int pasos_restantes_giro = pasos_giro;
         while (pasos_restantes > 0) {
             while (pasos_restantes_giro > 0) {
-                this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD,"VERIFICAR HELICOIDAL");
+                this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL,"VERIFICAR HELICOIDAL");
                 if (Global.helicoidal_fallido){
                     pasos_restantes = 0;
                     Global.helicoidal_fallido = false;

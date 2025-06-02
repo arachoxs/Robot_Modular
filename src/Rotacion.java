@@ -59,7 +59,7 @@ public class Rotacion extends ModuloDinamico {
         switch (mensaje) {
             case "ROTACION IZQUIERDA":
                 resultado_accion = moverse(-90);
-                this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD, "VERIFICAR IZQUIERDA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL, "VERIFICAR IZQUIERDA");
                 break;
 
             case "ROTACION IZQUIERDA FIJA":
@@ -68,7 +68,7 @@ public class Rotacion extends ModuloDinamico {
 
             case "ROTACION IZQUIERDA FALLIDA":
                 resultado_accion = moverse(180);
-                this.get_sistema_control().enviar_respuesta_accion(Global.SENSORPROXIMIDAD, "VERIFICAR DERECHA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL, "VERIFICAR DERECHA");
                 break;
 
             default:

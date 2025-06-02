@@ -7,13 +7,12 @@ public class Camara extends Percepcion{
     public Camara(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_sensores){
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_sensores);
         this.sensores = new ArrayList<>();
-        Sensor sensor_principal = new Sensor(Global.SENSOR_PRINCIPAL, "Proximidad", "Sensor que detecta objetos");
-        this.agregar_sensor(sensor_principal); // composición dentro del módulo
     }
 
     public void agregar_sensor(Sensor sensor){
         this.sensores.add(sensor);
         //aumentar numero sensores
+        this.set_n_sensores(this.get_n_sensores() + 1);
     }
 
     // Getters
@@ -25,6 +24,37 @@ public class Camara extends Percepcion{
         String instruccion_normalizada = mensaje.trim().toUpperCase();
 
         switch (instruccion_normalizada) {
+            case "OBSERVAR OBJETO":{
+                int objeto = this.captar_informacion();
+                switch (objeto){
+                    case 0: {
+                        System.out.println("Objeto detectado: Aire");
+                        resultado_accion = 1;
+                        break;
+                    }
+                    case 1: {
+                        System.out.println("Objeto detectado: Obstáculo");
+                        resultado_accion = 1;
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Objeto detectado: Mascota");
+                        resultado_accion = 1;
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Objeto detectado: Robot");
+                        resultado_accion = 1;
+                        break;
+                    }
+                    default: {
+                        System.out.println("Objeto no reconocido: " + objeto);
+                        resultado_accion = 0;
+                        break;
+                    }
+                }
+                break;
+            }
             case "RECONOCER OBJETO":
             case "IZQUIERDA FALLIDO":
             case "DERECHA FALLIDO":
@@ -58,7 +88,7 @@ public class Camara extends Percepcion{
                 this.get_sistema_control().enviar_respuesta_accion(Global.HELICOIDAL,"MOVIMIENTO HELICOIDAL FALLIDO");
             }
         }else{ //mascota
-            this.get_sistema_control().enviar_respuesta_accion(Global.ALTAVOZ,"EMITIR SONIDO");
+            this.get_sistema_control().enviar_respuesta_accion(Global.ALTAVOZ_PRINCIPAL,"EMITIR SONIDO");
         }
 
         return 1;

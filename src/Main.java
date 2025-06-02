@@ -8,6 +8,144 @@ public class Main {
         else if (direccion[0] == -1 && direccion[1] == 0) return "Oeste";
         else return "";
     }
+
+    public static void agregar_modulo_estatico(int tipo_modulo, Scanner scanner) {
+        int id;
+        while (true) {
+            System.out.print("Ingrese el ID del módulo: ");
+            id = scanner.nextInt();
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            if (Global.robot.existe_modulo_id(id)) {
+                System.out.println("Error: Ya existe un módulo con ese ID. Intente con otro ID.");
+            } else {
+                break;
+            }
+        }
+        System.out.print("Ingrese la referencia del módulo: ");
+        String referencia = scanner.nextLine();
+        System.out.print("Ingrese la descripción del módulo: ");
+        String descripcion = scanner.nextLine();
+        System.out.print("Ingrese el largo del módulo: ");
+        int largo = scanner.nextInt();
+        System.out.print("Ingrese el ancho del módulo: ");
+        int ancho = scanner.nextInt();
+        System.out.print("Ingrese la profundidad del módulo: ");
+        int profundidad = scanner.nextInt();
+        boolean encendido = Global.robot.get_encendido();
+
+        // agregar el módulo según el tipo
+        if (tipo_modulo == 1) {
+            Global.robot.agregar_camara(id, referencia, descripcion, largo, ancho, profundidad, encendido, 1);
+        } else if (tipo_modulo == 2) {
+            Global.robot.agregar_sensor_proximidad(id, referencia, descripcion, largo, ancho, profundidad, encendido, 1);
+        } else if (tipo_modulo == 3) {
+            Global.robot.agregar_altavoz(id, referencia, descripcion, largo, ancho, profundidad, encendido, 1);
+        } else {
+            System.out.println("Tipo de módulo no válido.");
+            return;
+        }
+
+        if (tipo_modulo == 1 || tipo_modulo == 2) {
+            System.out.print("Ingrese el número de sensores: ");
+            int n_sensores = scanner.nextInt();
+            // Aquí se puede agregar la lógica para agregar los sensores al módulo
+            for (int i = 0; i < n_sensores; i++) {
+                int sensor_id;
+                while (true) {
+                    System.out.print("Ingrese el ID del sensor " + (i + 1) + ": ");
+                    sensor_id = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar el buffer del scanner
+                    if (Global.robot.existe_sensor(sensor_id)) {
+                        System.out.println("Error: Ya existe un sensor con ese ID. Intente con otro ID.");
+                    } else {
+                        break;
+                    }
+                }
+                System.out.print("Ingrese el tipo del sensor " + (i + 1) + ": ");
+                String tipo_sensor = scanner.nextLine();
+                System.out.print("Ingrese la descripción del sensor " + (i + 1) + ": ");
+                String descripcion_sensor = scanner.nextLine();
+                Sensor sensor = new Sensor(sensor_id, tipo_sensor, descripcion_sensor);
+                // Aquí se puede agregar el sensor al módulo
+                if (tipo_modulo == 1) {
+                    // Agregar sensor a la cámara
+                    Camara camara = (Camara) Global.robot.get_modulo_id(id);
+                    camara.agregar_sensor(sensor);
+                } else if (tipo_modulo == 2) {
+                    SensorProximidad sensorProx = (SensorProximidad) Global.robot.get_modulo_id(id);
+                    sensorProx.agregar_sensor(sensor);
+                }
+            }
+            System.out.println("Módulo agregado con " + n_sensores + " sensores.");
+        } else if (tipo_modulo == 3) {
+            System.out.print("Ingrese el número de actuadores: ");
+            int n_actuadores = scanner.nextInt();
+            // Aquí se puede agregar la lógica para agregar los actuadores al módulo
+            for (int i = 0; i < n_actuadores; i++) {
+                int actuador_id;
+                while (true) {
+                    System.out.print("Ingrese el ID del actuador " + (i + 1) + ": ");
+                    actuador_id = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar el buffer del scanner
+                    if (Global.robot.existe_actuador(actuador_id)) {
+                        System.out.println("Error: Ya existe un actuador con ese ID. Intente con otro ID.");
+                    } else {
+                        break;
+                    }
+                }
+                System.out.print("Ingrese el tipo del actuador " + (i + 1) + ": ");
+                String tipo_actuador = scanner.nextLine();
+                System.out.print("Ingrese la descripción del actuador " + (i + 1) + ": ");
+                String descripcion_actuador = scanner.nextLine();
+                Actuador actuador = new Actuador(actuador_id, tipo_actuador, descripcion_actuador);
+                // Aquí se puede agregar el actuador al módulo
+                Altavoz altavoz = (Altavoz) Global.robot.get_modulo_id(id);
+                altavoz.agregar_actuador(actuador);
+            }
+            System.out.println("Módulo agregado con " + n_actuadores + " actuadores.");
+        }
+    }
+
+    public static void imprimir_modulos_estaticos() {
+        System.out.println("==== Lista de módulos estáticos ====");
+        for (Modulo modulo : Global.robot.get_modulos()) {
+            if (modulo instanceof ModuloDinamico) continue; // Solo imprimir módulos estáticos
+            System.out.printf(
+                "ID: %-4d | Ref: %-15s | Desc: %-25s | L: %-3d | A: %-3d | P: %-3d | Encendido: %-5s\n",
+                modulo.get_id(),
+                modulo.get_referencia(),
+                modulo.get_descripcion(),
+                modulo.get_largo(),
+                modulo.get_ancho(),
+                modulo.get_profundidad(),
+                modulo.get_encendido() ? "Sí" : "No"
+            );
+            if (modulo instanceof Camara) {
+                Camara camara = (Camara) modulo;
+                System.out.println("  Sensores (" + camara.get_sensores().size() + "):");
+                for (Sensor sensor : camara.get_sensores()) {
+                    System.out.printf("    - ID: %-4d | Tipo: %-15s | Desc: %-25s\n",
+                        sensor.get_id(), sensor.get_tipo(), sensor.get_descripcion());
+                }
+            } else if (modulo instanceof SensorProximidad) {
+                SensorProximidad sensorProx = (SensorProximidad) modulo;
+                System.out.println("  Sensores (" + sensorProx.get_sensores().size() + "):");
+                for (Sensor sensor : sensorProx.get_sensores()) {
+                    System.out.printf("    - ID: %-4d | Tipo: %-15s | Desc: %-25s\n",
+                        sensor.get_id(), sensor.get_tipo(), sensor.get_descripcion());
+                }
+            } else if (modulo instanceof Altavoz) {
+                Altavoz altavoz = (Altavoz) modulo;
+                System.out.println("  Actuadores (" + altavoz.get_actuadores().size() + "):");
+                for (Actuador actuador : altavoz.get_actuadores()) {
+                    System.out.printf("    - ID: %-4d | Tipo: %-15s | Desc: %-25s\n",
+                        actuador.get_id(), actuador.get_tipo(), actuador.get_descripcion());
+                }
+            }
+            System.out.println("------------------------------------------------------------------------------------------------------------------------");
+        }
+    }
+
     public static void main(String[] args) {
         //Configuración inicial del mapa
         //Global.mapa.set_celda(0, 4, 1);
@@ -29,6 +167,13 @@ public class Main {
         Global.mapa.set_celda(6, 6, Mapa.OBSTACULO);
         Global.mapa.set_celda(3, 6, Mapa.OBSTACULO);
         Global.mapa.set_celda(4, 6, Mapa.OBSTACULO);
+
+        Global.mapa.set_celda(4, 4, Mapa.MASCOTA);
+        Global.mapa.set_celda(4, 5, Mapa.MASCOTA);
+        Global.mapa.set_celda(5, 4, Mapa.MASCOTA);
+        Global.mapa.set_celda(5, 6, Mapa.MASCOTA);
+        Global.mapa.set_celda(6, 4, Mapa.MASCOTA);
+        Global.mapa.set_celda(6, 5, Mapa.MASCOTA);
         // Inicializar usuario
         new Usuario(1, "beta", "Estandar");
 
@@ -50,30 +195,40 @@ public class Main {
         }
 
         // Agregar módulos al robot
-        Global.robot.agregar_extension(Global.EXTENSION, "Extensión", "Extension por defecto", 10, 10, 10, false, 1);
-        Global.robot.agregar_rotacion(Global.ROTACION, "Rotación", "Rotacion por defecto", 10, 10, 10, false, 1);
-        Global.robot.agregar_helicoidal(Global.HELICOIDAL, "Helicoidal", "Helicoidal por defecto", 10, 10, 10, false, 1);
-        Global.robot.agregar_camara(Global.CAMARA, "Cámara", "Camara por defecto", 10, 10, 10, false, 1);
-        Global.robot.agregar_sensor_proximidad(Global.SENSORPROXIMIDAD, "Sensor de Proximidad", "Sensor de Proximidad por defecto", 10, 10, 10, false, 1);
-        Global.robot.agregar_altavoz(Global.ALTAVOZ, "Altavoz", "Altavoz por defecto", 10, 10, 10, false, 1);
-        if (Global.log) System.out.println("\n###############-LOG-##############");
-        Global.robot.encender();
-        if (Global.log) System.out.println("##############-/LOG-##############\n");
+        Global.robot.agregar_extension(Global.EXTENSION, "Extensión", "Extension principal", 10, 10, 10, false, 1);
+        Global.robot.agregar_rotacion(Global.ROTACION, "Rotación", "Rotacion principal", 10, 10, 10, false, 1);
+        Global.robot.agregar_helicoidal(Global.HELICOIDAL, "Helicoidal", "Helicoidal principal", 10, 10, 10, false, 1);
+        Global.robot.agregar_camara(Global.CAMARA_PRINCIPAL, "Cámara", "Camara principal", 10, 10, 10, false, 1);
+        Global.robot.agregar_sensor_proximidad(Global.SENSOR_PROXIMIDAD_PRINCIPAL, "Sensor de Proximidad", "Sensor de Proximidad principal", 10, 10, 10, false, 1);
+        Global.robot.agregar_altavoz(Global.ALTAVOZ_PRINCIPAL, "Altavoz", "Altavoz principal", 10, 10, 10, false, 1);
+        Global.inicializado = true;
 
         int opcion = -1;
         while(opcion != 0) {
-            System.out.println("Menú principal\n----------------------------------");
+            System.out.println("╔════════════════════════════════════════════════════════════╗");
+            System.out.println("║                      Menú principal                        ║");
+            System.out.println("╚════════════════════════════════════════════════════════════╝");
             Global.mapa.imprimir_mapa();
             System.out.println("Posición actual del robot: " + Global.robot.get_pos()[0] + " " + Global.robot.get_pos()[1]);
             System.out.println("Dirección actual del robot: " + traducir_direccion(Global.robot.get_direccion()));
-            System.out.println("----------------------------------");
-            System.out.println("1) Extensión\n2) Rotación\n3) Helicoidal\n4) Camara\n5) Sensor proximidad\n6) Altavoz\n0) Salir");
-            System.out.println("Seleccione una opcion: ");
+            System.out.println("╔════════════════════════════════════════════════════════════╗");
+            System.out.println("║ 1) Extensión              6) Altavoz                       ║");
+            System.out.println("║ 2) Rotación               7) Encender robot                ║");
+            System.out.println("║ 3) Helicoidal             8) Apagar robot                  ║");
+            System.out.println("║ 4) Cámara                 9) Agregar módulo estático       ║");
+            System.out.println("║ 5) Sensor proximidad     10) Lista de módulos estáticos    ║");
+            System.out.println("║ 0) Salir                                                   ║");
+            System.out.println("╚════════════════════════════════════════════════════════════╝");
+            System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 0:
                     break;
                 case 1: {
+                    if (!Global.robot.get_encendido()) {
+                        System.out.println("El robot debe estar encendido para realizar esta acción.");
+                        break;
+                    }
                     System.out.print("Ingrese el número de pasos a mover: ");
                     int n_pasos = scanner.nextInt();
                     if (Global.log) System.out.println("\n###############-LOG-##############");
@@ -82,6 +237,10 @@ public class Main {
                     break;
                 }
                 case 2: {
+                    if (!Global.robot.get_encendido()) {
+                        System.out.println("El robot debe estar encendido para realizar esta acción.");
+                        break;
+                    }
                     System.out.print("Ingrese el número de grados a girar (sentido horario): ");
                     int grados = scanner.nextInt();
                     if (Global.log) System.out.println("\n###############-LOG-##############");
@@ -90,6 +249,10 @@ public class Main {
                     break;
                 }
                 case 3: {
+                    if (!Global.robot.get_encendido()) {
+                        System.out.println("El robot debe estar encendido para realizar esta acción.");
+                        break;
+                    }
                     System.out.print("Ingrese el número de pasos a mover: ");
                     int n_pasos = scanner.nextInt();
                     int grados = 0;
@@ -114,6 +277,61 @@ public class Main {
                     if (Global.log) System.out.println("\n###############-LOG-##############");
                     Global.robot.get_modulo_id(Global.HELICOIDAL).get_sistema_comunicacion().recibir_mensaje("HELICOIDAL " + n_pasos + "," + grados + "," + pasos_giro);
                     if (Global.log) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                case 4: {
+                    if (!Global.robot.get_encendido()) {
+                        System.out.println("El robot debe estar encendido para realizar esta acción.");
+                        break;
+                    }
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
+                    Global.robot.get_modulo_id(Global.CAMARA_PRINCIPAL).get_sistema_comunicacion().recibir_mensaje("OBSERVAR OBJETO");
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                case 5: {
+                    if (!Global.robot.get_encendido()) {
+                        System.out.println("El robot debe estar encendido para realizar esta acción.");
+                        break;
+                    }
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
+                    Global.robot.get_modulo_id(Global.SENSOR_PROXIMIDAD_PRINCIPAL).get_sistema_comunicacion().recibir_mensaje("OBSERVAR");
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                case 6: {
+                    if (!Global.robot.get_encendido()) {
+                        System.out.println("El robot debe estar encendido para realizar esta acción.");
+                        break;
+                    }
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
+                    Global.robot.get_modulo_id(Global.ALTAVOZ_PRINCIPAL).get_sistema_comunicacion().recibir_mensaje("EMITIR");
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                case 7: {
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
+                    Global.robot.encender();
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                case 8: {
+                    if (Global.log) System.out.println("\n###############-LOG-##############");
+                    Global.robot.apagar();
+                    if (Global.log) System.out.println("##############-/LOG-##############\n");
+                    break;
+                }
+                case 9:{
+                    System.out.println("Seleccione el tipo de módulo estático a agregar:");
+                    System.out.println("1) Cámara\n2) Sensor de proximidad\n3) Altavoz");
+                    System.out.println("Seleccione una opción: ");
+                    int tipo_modulo = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar el buffer del scanner
+                    agregar_modulo_estatico(tipo_modulo, scanner);
+                    break;
+                }
+                case 10: {
+                    imprimir_modulos_estaticos();
                     break;
                 }
                 default: {
