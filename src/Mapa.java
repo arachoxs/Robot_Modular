@@ -68,9 +68,9 @@ public class Mapa {
 
                     System.out.print(Global.ANSI_RED + sentido + Global.ANSI_RESET + "\t");
                 }else if(matriz[i][j]==MASCOTA){
-                    System.out.print("\uD83D\uDC31" + "\t");
+                    System.out.print(Global.get_animal() + "\t");
                 }else if(matriz[i][j]==OBSTACULO){
-                    System.out.print("🗒️" + "\t");
+                    System.out.print("🧱" + "\t");
                 }else{
                     System.out.print(" " + "\t");
                 }

@@ -1,3 +1,8 @@
+import java.util.List;
+import java.util.Random;
+import java.util.Arrays;
+
+
 public class Global {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -31,4 +36,14 @@ public class Global {
         new java.util.Scanner(System.in).nextLine();
     }
 
+    public static String get_animal() {
+        List<String> animales = Arrays.asList(
+                "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯",
+                "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🐧", "🐦", "🐤", "🦆"
+        );
+
+        Random rand = new Random();
+        int index = rand.nextInt(animales.size());
+        return animales.get(index);
+    }
 }
