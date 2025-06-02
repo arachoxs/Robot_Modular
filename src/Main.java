@@ -148,7 +148,6 @@ public class Main {
 
     public static void main(String[] args) {
         //Configuración inicial del mapa
-        //Global.mapa.set_celda(0, 4, 1);
         /*Global.mapa.set_celda(1, 10, 1);
         for (int i = 5; i < 10; i++){
             Global.mapa.set_celda(2, i, 1);
