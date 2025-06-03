@@ -212,6 +212,7 @@ public class Main {
         Global.mapa.set_celda(6, 6, Mapa.OBSTACULO);
         Global.mapa.set_celda(3, 6, Mapa.OBSTACULO);
         Global.mapa.set_celda(4, 6, Mapa.OBSTACULO);
+        Global.mapa.set_celda(5, 9, Mapa.OBSTACULO);
         Global.mapa.set_celda(4, 4, Mapa.MASCOTA);
         Global.mapa.set_celda(4, 5, Mapa.MASCOTA);
         Global.mapa.set_celda(5, 4, Mapa.MASCOTA);
