@@ -1,13 +1,43 @@
+/**
+ * Clase Rotacion - Módulo dinámico para movimiento angular del robot
+ * 
+ * Este módulo proporciona capacidades de rotación al robot, permitiendo cambios
+ * de dirección en incrementos de 90 grados. Maneja tanto rotaciones en sentido
+ * horario como antihorario y coordina con sensores para navegación inteligente.
+ * 
+ * Convención de grados: Positivo = sentido horario, Negativo = sentido
+ * antihorario
+ */
 public class Rotacion extends ModuloDinamico {
-    //La convención usada para los grados es la siguiente: Positivo en sentido horario, negativo en sentido antihorario.
-    //Constructor
-    public Rotacion(int id, String referencia, String descripcion, int largo, int ancho, int profundidad, boolean encendido, int n_motores) {
+
+    /**
+     * Constructor del módulo de rotación.
+     * 
+     * @param id          Identificador único del módulo
+     * @param referencia  Referencia comercial del módulo
+     * @param descripcion Descripción de capacidades
+     * @param largo       Dimensión largo en milímetros
+     * @param ancho       Dimensión ancho en milímetros
+     * @param profundidad Dimensión profundidad en milímetros
+     * @param encendido   Estado inicial de encendido
+     * @param n_motores   Número de motores del módulo
+     */
+    public Rotacion(int id, String referencia, String descripcion, int largo, int ancho, int profundidad,
+            boolean encendido, int n_motores) {
         super(id, referencia, descripcion, largo, ancho, profundidad, encendido, n_motores);
     }
 
-    //Methods
+    /**
+     * Ejecuta rotación del robot cambiando su dirección.
+     * Calcula la nueva dirección basada en grados y actualiza el estado del robot.
+     * 
+     * @param n_pasos    No utilizado en rotación (siempre 0)
+     * @param grados     Grados a rotar (múltiplos de 90)
+     * @param pasos_giro No utilizado en rotación (siempre 0)
+     * @return true si la rotación fue exitosa
+     */
     @Override
-    public boolean moverse(int n_pasos, int grados , int pasos_giro) {
+    public boolean moverse(int n_pasos, int grados, int pasos_giro) {
         // Obtener la dirección actual del robot
         int[] direccion_actual = Global.robot.get_direccion();
 
@@ -40,26 +70,39 @@ public class Rotacion extends ModuloDinamico {
         // Cambiar la dirección del robot
         Global.robot.set_direccion(direcciones[nuevo_indice]);
 
-        if (Global.log) System.out.println("Robot giró " + grados + " grados. Nueva dirección: [" +
-                direcciones[nuevo_indice][0] + "," + direcciones[nuevo_indice][1] + "]");
+        if (Global.log)
+            System.out.println("Robot giró " + grados + " grados. Nueva dirección: [" +
+                    direcciones[nuevo_indice][0] + "," + direcciones[nuevo_indice][1] + "]");
 
         return true;
     }
 
-    public boolean moverse(int grados){
+    /**
+     * Sobrecarga para rotación simple.
+     * 
+     * @param grados Grados a rotar
+     * @return true si la rotación fue exitosa
+     */
+    public boolean moverse(int grados) {
         return moverse(0, grados, 0);
     }
 
+    /**
+     * Interpreta y procesa mensajes de rotación.
+     * Soporta comandos específicos y rotaciones con grados personalizados.
+     * 
+     * @param mensaje Comando de rotación a interpretar
+     */
     @Override
     public void interpretar_mensaje(String mensaje) {
         mensaje = mensaje.trim().toUpperCase(); // Normaliza el mensaje
         boolean resultado_accion = false;
 
-
         switch (mensaje) {
             case "ROTACION IZQUIERDA":
                 resultado_accion = moverse(-90);
-                this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL, "VERIFICAR IZQUIERDA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL,
+                        "VERIFICAR IZQUIERDA");
                 break;
 
             case "ROTACION IZQUIERDA FIJA":
@@ -68,7 +111,8 @@ public class Rotacion extends ModuloDinamico {
 
             case "ROTACION IZQUIERDA FALLIDA":
                 resultado_accion = moverse(180);
-                this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL, "VERIFICAR DERECHA");
+                this.get_sistema_control().enviar_respuesta_accion(Global.SENSOR_PROXIMIDAD_PRINCIPAL,
+                        "VERIFICAR DERECHA");
                 break;
 
             default:
@@ -91,6 +135,13 @@ public class Rotacion extends ModuloDinamico {
 
     }
 
+    /**
+     * Extrae el número de grados del comando ROTAR.
+     * 
+     * @param mensaje Mensaje que contiene el comando
+     * @return Número de grados extraído
+     * @throws NumberFormatException Si el número no es válido
+     */
     private int extraer_grados(String mensaje) throws NumberFormatException {
         String numeroStr = mensaje.substring("ROTAR".length()).trim();
         return Integer.parseInt(numeroStr);
@@ -99,22 +150,25 @@ public class Rotacion extends ModuloDinamico {
     @Override
     public void encender() {
         this.set_encendido(true);
-        if (Global.log) System.out.println("Módulo de Rotación encendido");
+        if (Global.log)
+            System.out.println("Módulo de Rotación encendido");
     }
 
     @Override
     public void apagar() {
         this.set_encendido(false);
-        if (Global.log) System.out.println("Módulo de Rotación apagado");
+        if (Global.log)
+            System.out.println("Módulo de Rotación apagado");
     }
 
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-        if(respuesta){
-            if (Global.log) System.out.println("Rotacion del robot ejecutada sin problemas.");
-        }
-        else{
-            if (Global.log) System.out.println("Error en rotacion detectada, ejecutando gestion de errores.");
+        if (respuesta) {
+            if (Global.log)
+                System.out.println("Rotacion del robot ejecutada sin problemas.");
+        } else {
+            if (Global.log)
+                System.out.println("Error en rotacion detectada, ejecutando gestion de errores.");
             this.gestionar_solucion();
         }
     }
