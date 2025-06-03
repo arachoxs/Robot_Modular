@@ -72,6 +72,11 @@ public class Altavoz extends Actuacion {
         return 1;
     }
 
+    /**
+     * Enciende el módulo altavoz y notifica el cambio de estado.
+     * Actualiza el estado de encendido y emite un mensaje de encendido si el log
+     * está habilitado.
+     */
     @Override
     public void encender() {
         this.set_encendido(true);
@@ -79,6 +84,12 @@ public class Altavoz extends Actuacion {
             System.out.println("Altavoz encendido");
     }
 
+    /**
+     * Apaga el módulo altavoz y notifica el cambio de estado.
+     *
+     * Actualiza el estado de encendido y emite un mensaje de apagado si el log
+     * está habilitado.
+     */
     @Override
     public void apagar() {
         this.set_encendido(false);

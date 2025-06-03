@@ -79,6 +79,11 @@ public class Helicoidal extends ModuloDinamico {
         return true;
     }
 
+    /**
+     * Enciende el módulo helicoidal y notifica el cambio de estado.
+     * Actualiza el estado de encendido y emite un mensaje de encendido si el log
+     * está habilitado.
+     */
     @Override
     public void encender() {
         this.set_encendido(true);
@@ -86,6 +91,12 @@ public class Helicoidal extends ModuloDinamico {
             System.out.println("Módulo Helicoidal encendido");
     }
 
+    /**
+     * Apaga el módulo helicoidal y notifica el cambio de estado.
+     *
+     * Actualiza el estado de encendido y emite un mensaje de apagado si el log
+     * está habilitado.
+     */
     @Override
     public void apagar() {
         this.set_encendido(false);
@@ -93,6 +104,15 @@ public class Helicoidal extends ModuloDinamico {
             System.out.println("Módulo Helicoidal apagado");
     }
 
+    /**
+     * Envía una respuesta de acción al sistema de control.
+     *
+     * Si la acción fue exitosa, imprime un mensaje de éxito.
+     * Si hubo un error, imprime un mensaje de error y ejecuta la gestión de
+     * solución.
+     *
+     * @param respuesta true si la acción fue exitosa, false si hubo un error
+     */
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
         if (respuesta) {

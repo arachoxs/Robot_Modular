@@ -146,6 +146,10 @@ public class SensorProximidad extends Percepcion {
         this.enviar_respuesta_accion(resultado_accion == 1);
     }
 
+    /** Enciende el módulo sensor de proximidad y notifica el cambio de estado.
+     * Actualiza el estado de encendido y emite un mensaje de encendido si el log
+     * está habilitado.
+     */
     @Override
     public void encender() {
         this.set_encendido(true);
@@ -153,6 +157,11 @@ public class SensorProximidad extends Percepcion {
             System.out.println("Sensor de Proximidad encendido");
     }
 
+    /**
+     * Apaga el módulo sensor de proximidad y notifica el cambio de estado.
+     * Actualiza el estado de encendido y emite un mensaje de apagado si el log
+     * está habilitado.
+     */
     @Override
     public void apagar() {
         this.set_encendido(false);
@@ -160,6 +169,14 @@ public class SensorProximidad extends Percepcion {
             System.out.println("Sensor de Proximidad apagado");
     }
 
+    /**
+     * Envía una respuesta de acción al sistema de control.
+     *
+     * Si la respuesta es positiva, notifica éxito; si es negativa, gestiona el
+     * error.
+     *
+     * @param respuesta Resultado de la acción ejecutada
+     */
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
         if (respuesta) {

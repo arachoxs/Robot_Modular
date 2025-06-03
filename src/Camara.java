@@ -163,6 +163,11 @@ public class Camara extends Percepcion {
         return -1;
     }
 
+    /**
+     * Enciende el módulo cámara y notifica el cambio de estado.
+     * Actualiza el estado de encendido y emite un mensaje de encendido si el log
+     * está habilitado.
+     */
     @Override
     public void encender() {
         this.set_encendido(true);
@@ -170,6 +175,12 @@ public class Camara extends Percepcion {
             System.out.println("Cámara encendida");
     }
 
+    /**
+     * Apaga el módulo cámara y notifica el cambio de estado.
+     *
+     * Actualiza el estado de encendido y emite un mensaje de apagado si el log
+     * está habilitado.
+     */
     @Override
     public void apagar() {
         this.set_encendido(false);
@@ -177,8 +188,22 @@ public class Camara extends Percepcion {
             System.out.println("Cámara apagada");
     }
 
+    /**
+     * Envía una respuesta de acción al sistema de control.
+     *
+     * Este método se invoca para notificar el resultado de una acción ejecutada por
+     * el módulo.
+     *
+     * @param respuesta Resultado de la acción (true=éxito, false=fallo)
+     */
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
-
+        if (respuesta) {
+            if (Global.log)
+                System.out.println("Acción de la cámara ejecutada sin problemas.");
+        } else {
+            if (Global.log)
+                System.out.println("Fallo en la acción de la cámara.");
+        }
     }
 }

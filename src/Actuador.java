@@ -36,6 +36,61 @@ public class Actuador {
         this.descripcion = descripcion;
     }
 
+    // Getters y Setters
+    /* * Obtiene el identificador único del actuador.
+     *
+     * @return Identificador del actuador
+     */
+    public int get_id() {
+        return id;
+    }
+
+    /**
+     * Obtiene el tipo o categoría del actuador.
+     *
+     * @return Tipo del actuador
+     */
+    public String get_tipo() {
+        return tipo;
+    }
+
+    /**
+     * Obtiene la descripción detallada de las capacidades del actuador.
+     *
+     * @return Descripción del actuador
+     */
+    public String get_descripcion() {
+        return descripcion;
+    }
+
+    /**
+     * Establece el identificador único del actuador.
+     *
+     * @param id Nuevo identificador del actuador
+     */
+    public void set_id(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Establece el tipo o categoría del actuador.
+     *
+     * @param tipo Nuevo tipo del actuador
+     */
+    public void set_tipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    /**
+     * Establece la descripción detallada de las capacidades del actuador.
+     *
+     * @param descripcion Nueva descripción del actuador
+     */
+    public void set_descripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+
     /**
      * Ejecuta la acción de ahuyentar mascotas en posiciones adyacentes al robot.
      * Busca mascotas en las 8 celdas circundantes y las mueve a posiciones
@@ -139,29 +194,5 @@ public class Actuador {
         }
 
         return null;
-    }
-
-    public int get_id() {
-        return id;
-    }
-
-    public String get_tipo() {
-        return tipo;
-    }
-
-    public String get_descripcion() {
-        return descripcion;
-    }
-
-    public void set_id(int id) {
-        this.id = id;
-    }
-
-    public void set_tipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public void set_descripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 }

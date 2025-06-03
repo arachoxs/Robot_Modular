@@ -147,6 +147,10 @@ public class Rotacion extends ModuloDinamico {
         return Integer.parseInt(numeroStr);
     }
 
+    /**
+     * Enciende el módulo de rotación.
+     * Registra el estado y muestra mensaje si el log está activo.
+     */
     @Override
     public void encender() {
         this.set_encendido(true);
@@ -154,6 +158,10 @@ public class Rotacion extends ModuloDinamico {
             System.out.println("Módulo de Rotación encendido");
     }
 
+    /**
+     * Apaga el módulo de rotación.
+     * Registra el estado y muestra mensaje si el log está activo.
+     */
     @Override
     public void apagar() {
         this.set_encendido(false);
@@ -161,6 +169,14 @@ public class Rotacion extends ModuloDinamico {
             System.out.println("Módulo de Rotación apagado");
     }
 
+    /**
+     * Envía una respuesta de acción al sistema de control.
+     *
+     * Este método se invoca para notificar el resultado de una acción ejecutada por
+     * el módulo.
+     *
+     * @param respuesta Resultado de la acción (true=éxito, false=fallo)
+     */
     @Override
     public void enviar_respuesta_accion(boolean respuesta) {
         if (respuesta) {

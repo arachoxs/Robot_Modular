@@ -29,6 +29,32 @@ public class Sensor {
         this.descripcion = descripcion;
     }
 
+    // Getters y Setters
+
+    public int get_id() {
+        return id;
+    }
+
+    public void set_id(int id) {
+        this.id = id;
+    }
+
+    public String get_tipo() {
+        return tipo;
+    }
+
+    public void set_tipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String get_descripcion() {
+        return descripcion;
+    }
+
+    public void set_descripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     /**
      * Captura información de la celda inmediatamente frente al robot.
      * Analiza la posición objetivo basándose en la dirección actual del robot
@@ -55,29 +81,5 @@ public class Sensor {
         if (Global.log)
             System.out.println("Información captada: " + informacion + "");
         return informacion;
-    }
-
-    public int get_id() {
-        return id;
-    }
-
-    public void set_id(int id) {
-        this.id = id;
-    }
-
-    public String get_tipo() {
-        return tipo;
-    }
-
-    public void set_tipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String get_descripcion() {
-        return descripcion;
-    }
-
-    public void set_descripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 }
